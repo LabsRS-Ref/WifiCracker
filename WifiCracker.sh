@@ -450,6 +450,16 @@ averiguar la contraseña, la cual será mostrada en formato legible.
   read
 }
 
+showIP(){
+
+echo " "
+echo -n "Tu IP pública es ->"
+GET http://www.vermiip.es/ | grep "Tu IP p&uacute;blica es" | cut -d ':' -f2 | cut -d '<' -f1
+echo " "
+sleep 5
+
+}
+
 while true
   do
 
@@ -470,8 +480,8 @@ while true
     echo "*************************************************"
     echo "[[-h | --help ] [-a | --author] [-v | --version]]"
     echo "*************************************************"
-    echo "0. Salir "
-    echo "-------------------------------------------------"
+    echo "0. Salir || ? - Mostrar IP pública ||"
+    echo "-------------------------------------"
     echo " "
     echo -n "Introduzca una opcion: "
     read opcionMenu
@@ -501,6 +511,8 @@ while true
       -a | --author ) autorInfo ;;
 
       -v | --version ) versionSystem ;;
+	
+      ? ) showIP ;;
 
       0 ) echo " "
           exit
