@@ -16,6 +16,14 @@
 
 
 value=1
+greenColour="\e[0;32m\033[1m"
+endColour="\033[0m\e[0m"
+redColour="\e[0;31m\033[1m"
+blueColour="\e[0;34m\033[1m"
+yellowColour="\e[0;33m\033[1m"
+purpleColour="\e[0;35m\033[1m"
+turquoiseColour="\e[0;36m\033[1m"
+grayColour="\e[0;37m\033[1m"
 
 monitorMode(){
 
@@ -25,15 +33,15 @@ monitorMode(){
 
   if [ "$(id -u)" = "0" ]; then
     echo " "
-    echo "Abriendo configuración de interfaz..."
+    echo -e "$greenColour Abriendo configuración de interfaz...$endColour"
     echo " "
     sleep 2
     ifconfig
     echo " "
-    echo -n "Indique su tarjeta de red Wifi (wlan0, wlp2s0...): "
+    echo -n -e "$yellowColour Indique su tarjeta de red Wifi (wlan0, wlp2s0...): $endlColour"
     read tarjetaRed
     echo " "
-    echo "Iniciando modo monitor..."
+    echo -e "$greenColour Iniciando modo monitor...$endColour"
     sleep 2
 
     if [ "$value" = "1" ]; then
@@ -50,11 +58,11 @@ monitorMode(){
       airmon-ng start $tarjetaRed
       value=2
       echo " "
-      echo "Dando de baja la interfaz mon0"
+      echo -e "$grennColour Dando de baja la interfaz mon0$endColour"
       echo " "
       sleep 2
       ifconfig mon0 down
-      echo "Cambiando direccion MAC..."
+      echo -e "$greenColour Cambiando direccion MAC...$endColour"
       echo " "
       sleep 2
 
@@ -70,12 +78,12 @@ monitorMode(){
 
       macchanger -a mon0
       echo " "
-      echo "Dando de alta la interfaz mon0"
+      echo -e "$greenColour Dando de alta la interfaz mon0$endColour"
       echo " "
       sleep 2
       ifconfig mon0 up
       value=2
-      echo "¡Terminado!"
+      echo -e "$blueColour ¡Terminado!$endColour"
       sleep 3
 
       # Si quisiéramos comprobar que nuestra dirección MAC ha sido cambiada, podemos
@@ -91,13 +99,13 @@ monitorMode(){
 
     else
       echo " "
-      echo "No es posible, ya estás en modo monitor"
+      echo -e "$redColour No es posible, ya estás en modo monitor$endColour"
       echo " "
       sleep 4
     fi
   elif [ "$(id -u)" != "0" ]; then
     echo " "
-    echo "Esto debe ser ejecutado como root"
+    echo -e "$redColour Esto debe ser ejecutado como root$endColour"
     echo " "
     exit 1
 fi
@@ -115,9 +123,9 @@ interfacesMode(){
   # this option will show you what is happening on interfaces.
 
   echo " "
-  echo "Abriendo configuración de interfaz..."
+  echo -e "$greenColour Abriendo configuración de interfaz...$endColour"
   echo " "
-  echo "'mon0' corresponderá a la nueva interfaz creada, encargada de escanear las redes WiFi disponibles..."
+  echo -e "$greenColour'mon0' corresponderá a la nueva interfaz creada, encargada de escanear las redes WiFi disponibles...$endColour"
   echo " "
   sleep 2
   ifconfig
@@ -129,7 +137,7 @@ interfacesMode(){
 monitorDown(){
 
   echo " "
-  echo "Dando de baja el modo monitor..."
+  echo -e "$greenColour Dando de baja el modo monitor...$endColour"
   echo " "
   sleep 2
   if [ "$value" = "2" ]; then
@@ -143,12 +151,12 @@ monitorDown(){
 
     airmon-ng stop mon0
     echo " "
-    echo "Interfaz mon0 dada de baja con éxito"
+    echo -e "$blueColour Interfaz mon0 dada de baja con éxito$endColour"
     echo " "
     sleep 4
     value=1
   else
-    echo "No hay interfaz mon0, tienes que iniciarla con la opción 1"
+    echo -e "$redColour No hay interfaz mon0, tienes que iniciarla con la opción 1$endColour"
     sleep 3
   fi
 
@@ -158,9 +166,9 @@ wifiScanner(){
 
   if [ "$value" = "2" ]; then
     echo " "
-    echo "Van a escanearse las redes Wifis cercanas..."
+    echo -e "$greenColour Van a escanearse las redes Wifis cercanas...$endColour"
     echo " "
-    echo "Una vez carguen más o menos todas las redes, presiona Ctrl+C"
+    echo -e "$greenColour Una vez carguen más o menos todas las redes, presiona Ctrl+C$endColour"
     sleep 4
 
     # 'airodump-ng' nos permite analizar las redes disponibles a través de una
@@ -178,29 +186,29 @@ wifiScanner(){
 
     airodump-ng mon0
     echo " "
-    echo -n "Red Wifi (ESSID) que quiere marcar como objetivo: "
+    echo -n -e "$yellowColour Red Wifi (ESSID) que quiere marcar como objetivo: $endColour"
     read wifiName
     echo " "
-    echo -n "Marque el canal (CH) en el que se encuentra : "
+    echo -n -e "$yellowColour Marque el canal (CH) en el que se encuentra: $endColour"
     read channelWifi
     echo " "
-    echo -n "Nombre que desea ponerle a la carpeta: "
+    echo -n -e "$yellowColour Nombre que desea ponerle a la carpeta: $endColour"
     read folderName
     echo " "
-    echo -n "Nombre que desea ponerle al archivo: "
+    echo -n -e "$yellowColour Nombre que desea ponerle al archivo: $endColour"
     read archiveName
     echo " "
-    echo -n "Escribe tu nombre de usuario del sistema: "
+    echo -n -e "$yellowColour Escribe tu nombre de usuario del sistema: $endColour"
     read userSystem
     echo " "
-    echo "Se va a crear una carpeta en el escritorio, esta contendrá toda la información de la red Wifi seleccionada"
+    echo -e "$greenColour Se va a crear una carpeta en el escritorio, esta contendrá toda la información de la red Wifi seleccionada$endColour"
     echo " "
     sleep 4
     mkdir /home/$userSystem/Escritorio/$folderName
     cd /home/$userSystem/Escritorio/$folderName
-    echo "A continuación vamos a ver la actividad sólo en $wifiName"
+    echo -e "$greenColour A continuación vamos a ver la actividad sólo en $wifiName $endColour "
     echo " "
-    echo "Abra otra terminal, y dejando en ejecución este proceso ejecute la opción 5"
+    echo -e "$greenColourAbra otra terminal, y dejando en ejecución este proceso ejecute la opción 5$endColour"
     echo " "
     sleep 7
 
@@ -216,7 +224,7 @@ wifiScanner(){
 
   else
     echo " "
-    echo "Inicia el modo monitor primero"
+    echo -e "$redColour Inicia el modo monitor primero$endColour"
     echo " "
     sleep 2
   fi
@@ -233,23 +241,23 @@ wifiPassword(){
   # when the customer is reconnected to the network (this is not always true, but for practical purposes we will say that)
 
   echo " "
-  echo "Esta opción sólo deberías ejecutarla si ya has hecho los pasos 1, 4 y 5... de lo contrario no obtendrás nada"
+  echo -e "$redColour Esta opción sólo deberías ejecutarla si ya has hecho los pasos 1, 4 y 5... de lo contrario no obtendrás nada$endColour"
   echo " "
   sleep 3
   echo " "
-  echo -n "Nombre del diccionario (póngalo en el escritorio, con extensión correspondiente): "
+  echo -n -e "$yellowColour Nombre del diccionario (póngalo en el escritorio, con extensión correspondiente): $endColour"
   read dictionaryName
   echo " "
-  echo -n "Nombre de la carpeta creada en el paso 4: "
+  echo -n -e "$yellowColour Nombre de la carpeta creada en el paso 4: $endColour"
   read folderName
   echo " "
-  echo -n "Nombre del archivo creado en el paso 4 (Con extensión correspondiente '.cap'): "
+  echo -n -e "$yellowColour Nombre del archivo creado en el paso 4 (Con extensión correspondiente '.cap'): $endColour"
   read archiveName
   echo " "
-  echo -n "Escribe tu nombre de usuario del sistema: "
+  echo -n -e "$yellowColour Escribe tu nombre de usuario del sistema: $endColour"
   read userSystem
   echo " "
-  echo "Vamos a proceder a averiguar la contraseña"
+  echo -e "$greenColour Vamos a proceder a averiguar la contraseña$endColour"
   echo " "
   sleep 5
 
@@ -270,10 +278,10 @@ wifiPassword(){
 resetProgram(){
 
   echo " "
-  echo "Esta opción deberías escogerla en caso de haber ya estado usando las anteriores"
+  echo -e "$redColour Esta opción deberías escogerla en caso de haber ya estado usando las anteriores$endColour"
   sleep 4
   echo " "
-  echo "Dando de baja el modo monitor..."
+  echo -e "$greenColour Dando de baja el modo monitor...$endColour"
   echo " "
   sleep 3
   airmon-ng stop mon0
@@ -466,39 +474,40 @@ while true
     clear
     echo " "
     sleep 0.4
-    echo -e " \e[0;32m\033[1m*************************************************\033[0m\e[0m"
+    echo -e "$greenColour*************************************************$endColour"
     sleep 0.4
-    echo -e "	\e[0;31m\033[1m╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗\033[0m\e[0m"
+    echo -e "$redColour        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗                   $endColour"
     sleep 0.4
-    echo -e "	\e[0;31m\033[1m║║║║║║─║╔╝║╔═╗║───────║║\033[0m\e[0m"
+    echo -e "$redColour        ║║║║║║─║╔╝║╔═╗║───────║║                   $endColour"
     sleep 0.4
-    echo -e "	\e[0;31m\033[1m║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗\033[0m\e[0m"
+    echo -e "$redColour        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗            $endColour"
     sleep 0.4
-    echo -e "	\e[0;31m\033[1m║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝\033[0m\e[0m"
+    echo -e "$redColour        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝            $endColour"
     sleep 0.4
-    echo -e "	\e[0;31m\033[1m╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║\033[0m\e[0m"
+    echo -e "$redColour        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║             $endColour"
     sleep 0.4
-    echo -e "	\e[0;31m\033[1m─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝\033[0m\e[0m"
-    echo -e " \e[0;32m\033[1m*************************************************\033[0m\e[0m"
+    echo -e "$redColour        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝             $endColour"
+    echo -e "$greenColour*************************************************$endColour"
     sleep 0.4
     echo " "
-    echo -e "\e[0;34m\033[1m1\033[0m\e[0m. \e[0;33m\033[1mIniciar el modo monitor\033[0m\e[0m "
-    echo -e "\e[0;34m\033[1m2\033[0m\e[0m. \e[0;33m\033[1mMostrar interfaces\033[0m\e[0m"
-    echo -e "\e[0;34m\033[1m3\033[0m\e[0m. \e[0;33m\033[1mDar de baja el modo monitor\033[0m\e[0m"
-    echo -e "\e[0;34m\033[1m4\033[0m\e[0m. \e[0;33m\033[1mEscanear redes wifis\033[0m\e[0m"
-    echo -e "\e[0;34m\033[1m5\033[0m\e[0m. \e[0;33m\033[1mDeautenticación a dirección MAC\033[0m\e[0m"
-    echo -e "\e[0;34m\033[1m6\033[0m\e[0m. \e[0;33m\033[1mFalsa autenticación de cliente\033[0m\e[0m"
-    echo -e "\e[0;34m\033[1m7\033[0m\e[0m. \e[0;33m\033[1mObtener contraseña Wifi\033[0m\e[0m"
-    echo -e "\e[0;34m\033[1m8\033[0m\e[0m. \e[0;33m\033[1mReiniciar programa\033[0m\e[0m"
-    echo -e "\e[0;34m\033[1m9\033[0m\e[0m. \e[0;33m\033[1mInstalar programas necesarios\033[0m\e[0m"
+    echo -e "$blueColour 1$endColour.$yellowColour Iniciar el modo monitor$endColour "
+    echo -e "$blueColour 2$endColour.$yellowColour Mostrar interfaces$endColour "
+    echo -e "$blueColour 3$endColour.$yellowColour Dar de baja el modo monitor$endColour "
+    echo -e "$blueColour 4$endColour.$yellowColour Escanear redes wifis$endColour "
+    echo -e "$blueColour 5$endColour.$yellowColour Deautenticación a dirección MAC$endColour "
+    echo -e "$blueColour 6$endColour.$yellowColour Falsa autenticación de cliente$endColour "
+    echo -e "$blueColour 7$endColour.$yellowColour Obtener contraseña Wifi$endColour "
+    echo -e "$blueColour 8$endColour.$yellowColour Reiniciar programa$endColour "
+    echo -e "$blueColour 9$endColour.$yellowColour Instalar programas necesarios$endColour "
     echo " "
-    echo "*************************************************"
-    echo "[[-h | --help ] [-a | --author] [-v | --version]]"
-    echo "*************************************************"
-    echo "0. Salir || ? - Mostrar IP pública ||"
-    echo "-------------------------------------"
+    echo -e "$greenColour*************************************************$endColour"
+    echo -e "$purpleColour-------------------------------------------------$endColour"
+    echo -e "$grayColour [[-h | --help ] [-a | --author] [-v | --version]]$endColour"
+    echo -e "$purpleColour-------------------------------------------------$endColour"
+    echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour||$endColour"
+    echo -e "$purpleColour-------------------------------------$endColour"
     echo " "
-    echo -n "Introduzca una opcion: "
+    echo -n -e "$yellowColour Introduzca una opcion: $endColour"
     read opcionMenu
 
     case $opcionMenu in
