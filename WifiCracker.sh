@@ -468,6 +468,21 @@ sleep 5
 
 }
 
+showMAC(){
+
+  echo " "
+  echo -e "$redColour  Para mostrar tu nueva dirección MAC desde la interfaz monitor es necesario que previamente lo
+  hayas dado de alta a través de la opción 1. De lo contrario, obtendrás errores.$endColour"
+  echo " "
+  sleep 3
+  echo -e "$greenColour Se va a mostrar tu nueva dirección MAC...$endColour"
+  echo " "
+  sleep 2
+  macchanger -s mon0 | grep Current
+  echo " "
+  sleep 4
+}
+
 while true
   do
 
@@ -491,23 +506,25 @@ while true
     echo -e "$greenColour*************************************************$endColour"
     sleep 0.5
     echo " "
-    echo -e "$blueColour 1$endColour.$yellowColour Iniciar el modo monitor$endColour "
+    echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour "
     sleep 0.1
-    echo -e "$blueColour 2$endColour.$yellowColour Mostrar interfaces$endColour "
+    echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour "
     sleep 0.1
-    echo -e "$blueColour 3$endColour.$yellowColour Dar de baja el modo monitor$endColour "
+    echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour "
     sleep 0.1
-    echo -e "$blueColour 4$endColour.$yellowColour Escanear redes wifis$endColour "
+    echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour "
     sleep 0.1
-    echo -e "$blueColour 5$endColour.$yellowColour Deautenticación a dirección MAC$endColour "
+    echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour "
     sleep 0.1
-    echo -e "$blueColour 6$endColour.$yellowColour Falsa autenticación de cliente$endColour "
+    echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour "
     sleep 0.1
-    echo -e "$blueColour 7$endColour.$yellowColour Obtener contraseña Wifi$endColour "
+    echo -e "$blueColour  7$endColour.$yellowColour Obtener contraseña Wifi$endColour "
     sleep 0.1
-    echo -e "$blueColour 8$endColour.$yellowColour Reiniciar programa$endColour "
+    echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour "
     sleep 0.1
-    echo -e "$blueColour 9$endColour.$yellowColour Instalar programas necesarios$endColour "
+    echo -e "$blueColour  9$endColour.$yellowColour Reiniciar programa$endColour "
+    sleep 0.1
+    echo -e "$blueColour 10$endColour.$yellowColour Instalar programas necesarios$endColour "
     sleep 0.1
     echo " "
     echo -e "$greenColour*************************************************$endColour"
@@ -542,9 +559,11 @@ while true
 
       7 ) wifiPassword ;;
 
-      8 ) resetProgram ;;
+      8 ) showMAC ;;
 
-      9 ) necessaryPrograms ;;
+      9 ) resetProgram ;;
+
+      10 ) necessaryPrograms ;;
 
       -h | --help ) panelHelp ;;
 
