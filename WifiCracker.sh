@@ -465,17 +465,32 @@ while true
 
     clear
     echo " "
-    echo "    *** Wifi Cracker ***"
+    sleep 0.4
+    echo -e " \e[0;32m\033[1m*************************************************\033[0m\e[0m"
+    sleep 0.4
+    echo -e "	\e[0;31m\033[1m╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗\033[0m\e[0m"
+    sleep 0.4
+    echo -e "	\e[0;31m\033[1m║║║║║║─║╔╝║╔═╗║───────║║\033[0m\e[0m"
+    sleep 0.4
+    echo -e "	\e[0;31m\033[1m║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗\033[0m\e[0m"
+    sleep 0.4
+    echo -e "	\e[0;31m\033[1m║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝\033[0m\e[0m"
+    sleep 0.4
+    echo -e "	\e[0;31m\033[1m╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║\033[0m\e[0m"
+    sleep 0.4
+    echo -e "	\e[0;31m\033[1m─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝\033[0m\e[0m"
+    echo -e " \e[0;32m\033[1m*************************************************\033[0m\e[0m"
+    sleep 0.4
     echo " "
-    echo "1. Iniciar el modo monitor "
-    echo "2. Mostrar interfaces"
-    echo "3. Dar de baja el modo monitor"
-    echo "4. Escanear redes wifis"
-    echo "5. Deautenticación a dirección MAC"
-    echo "6. Falsa autenticación de cliente"
-    echo "7. Obtener contraseña Wifi"
-    echo "8. Reiniciar programa"
-    echo "9. Instalar programas necesarios"
+    echo -e "\e[0;34m\033[1m1\033[0m\e[0m. \e[0;33m\033[1mIniciar el modo monitor\033[0m\e[0m "
+    echo -e "\e[0;34m\033[1m2\033[0m\e[0m. \e[0;33m\033[1mMostrar interfaces\033[0m\e[0m"
+    echo -e "\e[0;34m\033[1m3\033[0m\e[0m. \e[0;33m\033[1mDar de baja el modo monitor\033[0m\e[0m"
+    echo -e "\e[0;34m\033[1m4\033[0m\e[0m. \e[0;33m\033[1mEscanear redes wifis\033[0m\e[0m"
+    echo -e "\e[0;34m\033[1m5\033[0m\e[0m. \e[0;33m\033[1mDeautenticación a dirección MAC\033[0m\e[0m"
+    echo -e "\e[0;34m\033[1m6\033[0m\e[0m. \e[0;33m\033[1mFalsa autenticación de cliente\033[0m\e[0m"
+    echo -e "\e[0;34m\033[1m7\033[0m\e[0m. \e[0;33m\033[1mObtener contraseña Wifi\033[0m\e[0m"
+    echo -e "\e[0;34m\033[1m8\033[0m\e[0m. \e[0;33m\033[1mReiniciar programa\033[0m\e[0m"
+    echo -e "\e[0;34m\033[1m9\033[0m\e[0m. \e[0;33m\033[1mInstalar programas necesarios\033[0m\e[0m"
     echo " "
     echo "*************************************************"
     echo "[[-h | --help ] [-a | --author] [-v | --version]]"
@@ -511,7 +526,7 @@ while true
       -a | --author ) autorInfo ;;
 
       -v | --version ) versionSystem ;;
-	
+
       ? ) showIP ;;
 
       0 ) echo " "
