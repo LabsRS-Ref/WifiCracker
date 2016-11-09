@@ -410,7 +410,7 @@ autorInfo(){
 versionSystem(){
 
   echo " "
-  echo -e "$grayColour WifiCracker (v0.1.2) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
+  echo -e "$grayColour WifiCracker (v0.1.3) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
   echo " "
   sleep 5
 
@@ -454,7 +454,7 @@ panelHelp(){
   averiguar la contraseña, la cual será mostrada en formato legible.$endColour
 $greenColour**********************************************************************************************$endColour"
   echo " "
-  echo -n -e "$blueColour Pulse cualquier tecla y Enter para volver al menú principal: $endColour"
+  echo -n -e "$blueColour Pulse <Enter> para volver al menú principal $endColour"
   read
 }
 
@@ -475,7 +475,7 @@ while true
     echo " "
     sleep 0.4
     echo -e "$greenColour*************************************************$endColour"
-    sleep 0.1
+    sleep 0.5
     echo -e "$redColour        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗                   $endColour"
     sleep 0.1
     echo -e "$redColour        ║║║║║║─║╔╝║╔═╗║───────║║                   $endColour"
@@ -487,25 +487,41 @@ while true
     echo -e "$redColour        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║             $endColour"
     sleep 0.1
     echo -e "$redColour        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝             $endColour"
+    sleep 0.5
     echo -e "$greenColour*************************************************$endColour"
-    sleep 0.1
+    sleep 0.5
     echo " "
     echo -e "$blueColour 1$endColour.$yellowColour Iniciar el modo monitor$endColour "
+    sleep 0.1
     echo -e "$blueColour 2$endColour.$yellowColour Mostrar interfaces$endColour "
+    sleep 0.1
     echo -e "$blueColour 3$endColour.$yellowColour Dar de baja el modo monitor$endColour "
+    sleep 0.1
     echo -e "$blueColour 4$endColour.$yellowColour Escanear redes wifis$endColour "
+    sleep 0.1
     echo -e "$blueColour 5$endColour.$yellowColour Deautenticación a dirección MAC$endColour "
+    sleep 0.1
     echo -e "$blueColour 6$endColour.$yellowColour Falsa autenticación de cliente$endColour "
+    sleep 0.1
     echo -e "$blueColour 7$endColour.$yellowColour Obtener contraseña Wifi$endColour "
+    sleep 0.1
     echo -e "$blueColour 8$endColour.$yellowColour Reiniciar programa$endColour "
+    sleep 0.1
     echo -e "$blueColour 9$endColour.$yellowColour Instalar programas necesarios$endColour "
+    sleep 0.1
     echo " "
     echo -e "$greenColour*************************************************$endColour"
+    sleep 0.1
     echo -e "$purpleColour-------------------------------------------------$endColour"
+    sleep 0.1
     echo -e "$grayColour [[-h | --help ] [-a | --author] [-v | --version]]$endColour"
+    sleep 0.1
     echo -e "$purpleColour-------------------------------------------------$endColour"
+    sleep 0.1
     echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour||$endColour"
     echo -e "$purpleColour-------------------------------------$endColour"
+    sleep 0.1
+    
     echo " "
     echo -n -e "$yellowColour Introduzca una opcion: $endColour"
     read opcionMenu
