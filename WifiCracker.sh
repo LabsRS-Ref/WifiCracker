@@ -476,17 +476,17 @@ while true
     sleep 0.4
     echo -e "$greenColour*************************************************$endColour"
     sleep 0.5
-    echo -e "$redColour        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗                   $endColour"
+    echo -e "$redColour       ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗                   $endColour"
     sleep 0.1
-    echo -e "$redColour        ║║║║║║─║╔╝║╔═╗║───────║║                   $endColour"
+    echo -e "$redColour       ║║║║║║─║╔╝║╔═╗║───────║║                   $endColour"
     sleep 0.1
-    echo -e "$redColour        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗            $endColour"
+    echo -e "$redColour       ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗            $endColour"
     sleep 0.1
-    echo -e "$redColour        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝            $endColour"
+    echo -e "$redColour       ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(V0.1.3)$endColour"
     sleep 0.1
-    echo -e "$redColour        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║             $endColour"
+    echo -e "$redColour       ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║             $endColour"
     sleep 0.1
-    echo -e "$redColour        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝             $endColour"
+    echo -e "$redColour       ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝             $endColour"
     sleep 0.5
     echo -e "$greenColour*************************************************$endColour"
     sleep 0.5
@@ -521,7 +521,7 @@ while true
     echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour||$endColour"
     echo -e "$purpleColour-------------------------------------$endColour"
     sleep 0.1
-    
+
     echo " "
     echo -n -e "$yellowColour Introduzca una opcion: $endColour"
     read opcionMenu
