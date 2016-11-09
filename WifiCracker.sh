@@ -410,7 +410,7 @@ autorInfo(){
 versionSystem(){
 
   echo " "
-  echo -e "$grayColour WifiCracker (v0.1.3) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
+  echo -e "$grayColour WifiCracker (v0.1.4) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
   echo " "
   sleep 5
 
@@ -483,59 +483,81 @@ showMAC(){
   sleep 4
 }
 
+changeMAC(){
+
+  echo " "
+  echo -e "$redColour  Esta opción deberías ejecutarla en caso de haber ya iniciado el modo monitor a través de la opción 1.
+
+  De lo contrario, obtendrás errores.$endColour"
+  echo " "
+  sleep 3
+  echo -e "$greenColour Procedemos a cambiar nuevamente tu dirección MAC en la interfaz 'mon0'...$endColour"
+  echo " "
+  sleep 2
+  ifconfig mon0 down
+  echo " "
+  macchanger -a mon0
+  echo " "
+  ifconfig mon0 up
+  echo " "
+  echo -e "$blueColour ¡Proceso Terminado!, puedes comprobar tu nueva dirección MAC a través de la opción 8$endColour"
+  echo " "
+  sleep 4
+}
+
 while true
   do
 
     clear
     echo " "
     sleep 0.4
-    echo -e "$greenColour*************************************************$endColour"
+    echo -e "$greenColour*****************************************************************************$endColour"
     sleep 0.5
-    echo -e "$redColour       ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗                   $endColour"
+    echo -e "$redColour                        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗$endColour                            $greenColour*$endColour"
     sleep 0.1
-    echo -e "$redColour       ║║║║║║─║╔╝║╔═╗║───────║║                   $endColour"
+    echo -e "$redColour                        ║║║║║║─║╔╝║╔═╗║───────║║$endColour                            $greenColour*$endColour"
     sleep 0.1
-    echo -e "$redColour       ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗            $endColour"
+    echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
     sleep 0.1
-    echo -e "$redColour       ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(V0.1.3)$endColour"
+    echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(V0.1.4)$endColour           $greenColour*$endColour"
     sleep 0.1
-    echo -e "$redColour       ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║             $endColour"
+    echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
     sleep 0.1
-    echo -e "$redColour       ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝             $endColour"
+    echo -e "$redColour                        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝ $endColour                     $greenColour*$endColour"
     sleep 0.5
-    echo -e "$greenColour*************************************************$endColour"
+    echo -e "$greenColour*****************************************************************************$endColour"
     sleep 0.5
-    echo " "
-    echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour "
+    echo -e "                                                                            $greenColour*$endColour "
+    echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Instalar programas necesarios$endColour  $greenColour*$endColour"
     sleep 0.1
-    echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour "
+    echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour                                     $greenColour*$endColour"
     sleep 0.1
-    echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour "
+    echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour                                     $greenColour*$endColour "
     sleep 0.1
-    echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour "
+    echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour                                     $greenColour*$endColour "
     sleep 0.1
-    echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour "
+    echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
     sleep 0.1
-    echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour "
+    echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
     sleep 0.1
-    echo -e "$blueColour  7$endColour.$yellowColour Obtener contraseña Wifi$endColour "
+    echo -e "$blueColour  7$endColour.$yellowColour Obtener contraseña Wifi$endColour         $blueColour||$endColour                                     $greenColour*$endColour "
     sleep 0.1
-    echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour "
+    echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
     sleep 0.1
-    echo -e "$blueColour  9$endColour.$yellowColour Reiniciar programa$endColour "
+    echo -e "$blueColour  9$endColour.$yellowColour Cambiar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
     sleep 0.1
-    echo -e "$blueColour 10$endColour.$yellowColour Instalar programas necesarios$endColour "
+    echo -e "$blueColour 10$endColour.$yellowColour Reiniciar programa$endColour             $blueColour ||$endColour                                     $greenColour*$endColour "
     sleep 0.1
-    echo " "
-    echo -e "$greenColour*************************************************$endColour"
+    echo -e "                                                                            $greenColour*$endColour "
+    echo -e "$greenColour*****************************************************************************$endColour"
     sleep 0.1
-    echo -e "$purpleColour-------------------------------------------------$endColour"
+    echo -e "$purpleColour---------------------------------------------------$endColour"
     sleep 0.1
-    echo -e "$grayColour [[-h | --help ] [-a | --author] [-v | --version]]$endColour"
+    echo -e "$grayColour [[-h | --help ] [-a | --author] [-v | --version]]$endColour$purpleColour|$endColour"
     sleep 0.1
-    echo -e "$purpleColour-------------------------------------------------$endColour"
+    echo -e "$purpleColour---------------------------------------------------$endColour"
     sleep 0.1
-    echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour||$endColour"
+    echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour|$endColour"
     echo -e "$purpleColour-------------------------------------$endColour"
     sleep 0.1
 
@@ -561,9 +583,11 @@ while true
 
       8 ) showMAC ;;
 
-      9 ) resetProgram ;;
+      9 ) changeMAC ;;
 
-      10 ) necessaryPrograms ;;
+      10 ) resetProgram ;;
+
+      11 ) necessaryPrograms ;;
 
       -h | --help ) panelHelp ;;
 
