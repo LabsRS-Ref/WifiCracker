@@ -639,6 +639,35 @@ wifiPasswordHelp(){
 
 }
 
+showMacHelp(){
+
+  clear
+  echo -e "$blueColour Opción 8$endColour"
+  echo " "
+  echo -e "$yellowColour  Esta opción nos permitirá ver cuál es nuestra dirección MAC. Obviamente, la dirección mostrada es la falsa creada
+  una vez hemos iniciado el modo monitor. A través de la opción 9 podremos cambiarla continuamente siempre que queramos sin ningún tipo
+  de problema$endColour"
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
+}
+
+changeMacHelp(){
+
+  clear
+  echo -e "$blueColour Opción 9$endColour"
+  echo " "
+  echo -e "$yellowColour  Esta opción nos otorga cambiar nuestra dirección MAC en el modo monitor previamente creado desde la opción 1.
+  Todas las direcciones MAC creadas desde esta opción del menú son falsas, hacemos estos cambios para evitar ser detectados en caso de
+  haber algún tipo de problema$endColour"
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
+}
+
+
 while true
   do
     if [ "$entrada" = "1" ]; then
@@ -882,6 +911,9 @@ while true
 
       -h7 ) wifiPasswordHelp ;;
 
+      -h8 ) showMacHelp ;;
+
+      -h9 ) changeMacHelp ;;
       0 ) echo " "
       exit
       ;;
