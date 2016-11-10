@@ -571,6 +571,74 @@ monitorDownHelp(){
 
 }
 
+wifiScannerHelp(){
+
+  clear
+  echo -e "$blueColour Opción 4$endColour"
+  echo " "
+  echo -e "$yellowColour  Simple escaneo de redes Wifi disponibles en nuestro entorno. Importante tener en cuenta que si no estamos en modo
+  monitor, no seremos capaces de capturar nada."
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
+}
+
+macAttackHelp(){
+
+  clear
+  echo -e "$blueColour Opción 5$endColour"
+  echo " "
+  echo -e "$yellowColour  En esta opción enviarás paquetes de de-autenticación a un cliente determinado conectado a la red que tienes fijada
+  como objetivo. Mediante esta opción, eres capaz de echar a un usuario cualquiera de la red especificando su dirección MAC. También puedes
+  echarlos a todos usando como dirección MAC a atacar la siguiente -> FF:FF:FF:FF:FF:FF | que corresponde a un Broadcast (Todos los usuarios
+  conectados a la red).
+
+  Esta opción es sumamente importante, pues después una vez se reconecte el usuario a la red, se generará el Handhsake... cosa de la que nos
+  aprovecharemos para capturar la contraseña del Wifi.
+  El 'ataque' de de-autenticación terminará hasta que nosotros queramos. Es decir, el usuario no podrá volverse a conectar a la red hasta que
+  nosotros paremos el envío de paquetes"
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
+}
+
+fakeAuthHelp(){
+
+  clear
+  echo -e "$blueColour Opción 6$endColour"
+  echo " "
+  echo -e "$yellowColour  En ocasiones, ningún usuario estará conectado a la red... por lo que si queremos averiguar la contraseña del Wifi, nos
+  será imposible. Pero no imposible del todo, por ello nos encargamos de engañar al routter haciéndole creer que hay un usuario conectado. De esta
+  manera podremos realizar el procedimiento como si se tratara de un usuario normal y corriente, después de haberlo creado.
+
+  Generalmente, lo mejor es utilizar a un usuario cualquiera que el programa nos detecte al escanear las redes, el cual no esté asociado a ninguna
+  red. Lo utilizamos para asociarlo a la que queremos falsamente.
+  También podemos usar nuestra propia dirección MAC (la falsa) para evitar tener que autenticar a otros. Podremos ver en todo momento qué dirección
+  MAC tenemos en el monitor que hemos creado a través de la opción 8."
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
+}
+
+wifiPasswordHelp(){
+
+  clear
+  echo -e "$blueColour Opción 7$endColour"
+  echo " "
+  echo -e "$yellowColour  A través de esta opción comienza el ataque por fuerza bruta a la contraseña del Wifi que queremos averiguar. Para ello
+  tendremos que hacer uso de un Diccionario. A más grande sea el diccionario que poseas, mayor probabilidad hay de que encuentres la contraseña.
+  Trabajamos con grandes datos, en ocasiones con diccionarios de 227 millones de palabras, por lo que dependiendo de la CPU de tu ordenador,
+  será capaz de analizar más o menos palabras por segundo. Lo mejor ante estos casos es hacer uso de un supercomputador para obtener en cuestión
+  de segundos la contraseña."
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
+}
+
 while true
   do
     if [ "$entrada" = "1" ]; then
@@ -805,6 +873,14 @@ while true
       -h2 ) interfacesHelp ;;
 
       -h3 ) monitorDownHelp ;;
+
+      -h4 ) wifiScannerHelp ;;
+
+      -h5 ) macAttackHelp ;;
+
+      -h6 ) fakeAuthHelp ;;
+
+      -h7 ) wifiPasswordHelp ;;
 
       0 ) echo " "
       exit
