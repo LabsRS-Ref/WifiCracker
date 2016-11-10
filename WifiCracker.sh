@@ -456,7 +456,10 @@ panelHelp(){
   averiguar la contraseña, la cual será mostrada en formato legible.
 
   Si te surgen dudas con alguna de las opciones, puedes usar '-h' acompañada de la opción
-  para ver qué función principal tiene la misma. Ejemplo -> '-h1, -h3, -h5...'$endColour
+  para ver qué función principal tiene la misma.$endColour
+
+$blueColour  Ejemplo -> '-h1, -h3, -h5...'$endColour
+
 $greenColour**********************************************************************************************$endColour"
   echo " "
   echo -n -e "$blueColour Pulse <Enter> para volver al menú principal $endColour"
@@ -531,6 +534,43 @@ monitorHelp(){
 
 }
 
+interfacesHelp(){
+
+  clear
+  echo -e "$blueColour Opción 2$endColour"
+  echo " "
+  echo -e "$yellowColour  Esta opción te muestra las interfaces que posees. Servirá para verificar en todo momento qué está
+  sucediendo con la interfaz que estamos trabajando, ya que en esta se realizarán algunos cambios. Generalmente en un principio
+  deberías tener 3 interfaces, a no ser que estés bajo una VPN... que tendrás una virtual de red más. La situada en la parte inferior
+  es la tarjeta de red, tarjeta de la cual nos aprovecharemos para una vez estando en modo monitor... poder capturar las redes
+  disponibles en nuestros alrededores.
+
+  Podremos comprobar si estamos en modo monitor siempre que veamos una nueva interfaz llamada 'mon0'. En caso contrario, podrá
+  resultar que la tenemos dada de baja o bien no la hemos creado, por tanto tendremos que acudir a la opción 1 para crearla.$endColour"
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
+}
+
+monitorDownHelp(){
+
+  clear
+  echo -e "$blueColour Opción 3$endColour"
+  echo " "
+  echo -e "$yellowColour  Una vez hayamos conseguido nuestros objetivos, lo mejor es eliminar el modo monitor... pues de lo contrario
+  lo tendremos inútilmente activado sin ser utilizado desde que salgamos del programa. Eliminarlo es distinto a darlo de baja, un monitor
+  se da de baja para realizar configuraciones sobe él y posteriormente darlo de alta, porque de lo contrario cualquier tipo de cambio
+  realizado estando en modo normal no nos será autorizado aún así siendo superusuario.
+
+  En resúmen, con esta opción lo eliminamos completamente. Si queremos volver a darlo de alta, tendremos que usar la opción 1 nuevamente
+  para crear un nuevo modo monitor."
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
+}
+
 while true
   do
     if [ "$entrada" = "1" ]; then
@@ -550,7 +590,7 @@ while true
       echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
       sleep 0.1
       echo -e "$redColour                        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝ $endColour                     $greenColour*$endColour"
-      sleep 0.5
+      sleep 0.
       echo -e "$greenColour*****************************************************************************$endColour"
       sleep 0.5
       echo -e "                                                                            $greenColour*$endColour "
@@ -710,9 +750,9 @@ while true
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Instalar programas necesarios$endColour  $greenColour*$endColour"
       echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour                                     $greenColour*$endColour"
       echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour                                     $greenColour*$endColour "
-      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour                  *                  $greenColour*$endColour "
-      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                  *                  $greenColour*$endColour "
-      echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                  *                  $greenColour*$endColour "
+      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  7$endColour.$yellowColour Obtener contraseña Wifi$endColour         $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  9$endColour.$yellowColour Cambiar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
@@ -725,7 +765,6 @@ while true
       echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour|$endColour"
       echo -e "$purpleColour-------------------------------------$endColour"
       echo " "
-      sleep 0.5
     fi
 
     echo -n -e "$yellowColour Introduzca una opcion -> $endColour"
@@ -762,6 +801,10 @@ while true
       -v | --version ) versionSystem ;;
 
       -h1 ) monitorHelp ;;
+
+      -h2 ) interfacesHelp ;;
+
+      -h3 ) monitorDownHelp ;;
 
       0 ) echo " "
       exit
