@@ -419,6 +419,7 @@ versionSystem(){
 
 panelHelp(){
 
+  clear
   echo " "
   echo -e "$greenColour*******************************************************************************************$endColour"
   echo -e "$yellowColour  El primer paso es iniciar el modo monitor a través de la opción 1. Una vez iniciado
@@ -452,7 +453,10 @@ panelHelp(){
   Por tanto, una vez hecho todo este proceso, mediante la opción 7 especificamos 2 rutas,
   por un lado la del Diccionario (que deberá ser puesto en el Escritorio) y por otro la del
   fichero '.cap' que se nos generó en la opción 4. El programa comenzará a trabajar hasta
-  averiguar la contraseña, la cual será mostrada en formato legible.$endColour
+  averiguar la contraseña, la cual será mostrada en formato legible.
+
+  Si te surgen dudas con alguna de las opciones, puedes usar '-h' acompañada de la opción
+  para ver qué función principal tiene la misma. Ejemplo -> '-h1, -h3, -h5...'$endColour
 $greenColour**********************************************************************************************$endColour"
   echo " "
   echo -n -e "$blueColour Pulse <Enter> para volver al menú principal $endColour"
@@ -504,6 +508,27 @@ changeMAC(){
   echo -e "$blueColour ¡Proceso Terminado!, puedes comprobar tu nueva dirección MAC a través de la opción 8$endColour"
   echo " "
   sleep 4
+}
+
+monitorHelp(){
+
+  clear
+  echo -e "$blueColour Opción 1$endColour "
+  echo " "
+  echo -e "$yellowColour  Esta opción te permite estar en modo monitor. La pregunta es por qué es tan necesario hacer
+  esto y qué finalidad tiene este mismo proceso.
+
+  Cuando tú estás en modo monitor, eres capaz de escuchar y capturar cualquier tipo de paquete que viaje por el aire.
+  Es importante, puesto que debemos ser capaces de capturar las direcciones MAC de los clientes cercanos que tengamos
+  conectados a una red, para posteriormente de-autenticarlos (echarlos de la red) y esperar a que se reconecten
+  para capturar un Handshake. Por tanto esta opción es fundamental para iniciar todo el proceso que viene a continuación,
+  de lo contrario todas las opciones que usemos darán error.
+
+  Debe ser la primera opción que escojamos.$endColour"
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
 }
 
 while true
@@ -689,7 +714,7 @@ while true
       echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                  *                  $greenColour*$endColour "
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                  *                  $greenColour*$endColour "
       echo -e "$blueColour  7$endColour.$yellowColour Obtener contraseña Wifi$endColour         $blueColour||$endColour                                     $greenColour*$endColour "
-      echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour    $blueColour||$endColour            $redColour(Más pronto)$endColour             $greenColour*$endColour "
+      echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  9$endColour.$yellowColour Cambiar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour 10$endColour.$yellowColour Reiniciar programa$endColour             $blueColour ||$endColour                                     $greenColour*$endColour "
       echo -e "                                                                            $greenColour*$endColour "
@@ -703,7 +728,7 @@ while true
       sleep 0.5
     fi
 
-    echo -n -e "$yellowColour Introduzca una opcion: $endColour"
+    echo -n -e "$yellowColour Introduzca una opcion -> $endColour"
     read opcionMenu
 
     case $opcionMenu in
@@ -735,6 +760,8 @@ while true
       -a | --author ) autorInfo ;;
 
       -v | --version ) versionSystem ;;
+
+      -h1 ) monitorHelp ;;
 
       0 ) echo " "
       exit
