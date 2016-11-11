@@ -672,7 +672,7 @@ repairNetworkHelp(){
   clear
   echo -e "$blueColour Opción 11$endColour"
   echo " "
-  echo -e "$yellowColour En ocasiones, el programa tal vez te deshabilite el icono de las redes Wifis situado en la esquina superior derecha
+  echo -e "$yellowColour  En ocasiones, el programa tal vez te deshabilite el icono de las redes Wifis situado en la esquina superior derecha
   de tu pantalla. Esto podrás arreglarlo fácilmente a través de esta opción.$endColour"
   echo " "
   echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
@@ -684,12 +684,31 @@ repairNetwork(){
 
   echo " "
   echo -e "$greenColour Volviendo a dejar operativo el escaneo de redes de tu ordenador...$endColour"
+  echo " "
   sleep 3
   service network-manager restart
   echo " "
   echo -e "$blueColour ¡Terminado!$endColour"
   echo " "
   sleep 3
+
+}
+
+showProject(){
+
+  if [ "$(id -u)" != "0" ]; then
+    echo " "
+    echo -e "$blueColour Abriendo navegador...$endColour"
+    echo " "
+    sleep 3
+    chromium-browser https://github.com/Marcelorvp/WifiCracker
+    sleep 3
+  else
+    echo " "
+    echo -e "$redColour Esta opción debe ser ejecutada como usuario normal$endColour"
+    echo " "
+    sleep 4
+  fi
 
 }
 
@@ -719,9 +738,9 @@ while true
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
       sleep 0.1
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
       sleep 0.1
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
       sleep 0.1
       echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour                                     $greenColour*$endColour "
       sleep 0.1
@@ -766,8 +785,8 @@ while true
       echo -e "$greenColour*****************************************************************************$endColour"
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Reiniciar Programa           $endColour  $greenColour*$endColour"
       echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
@@ -800,8 +819,8 @@ while true
       echo -e "$greenColour*****************************************************************************$endColour"
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Reiniciar Programa           $endColour  $greenColour*$endColour"
       echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
@@ -834,8 +853,8 @@ while true
       echo -e "$greenColour*****************************************************************************$endColour"
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Reiniciar Programa           $endColour  $greenColour*$endColour"
       echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
@@ -868,8 +887,8 @@ while true
       echo -e "$greenColour*****************************************************************************$endColour"
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Reiniciar Programa           $endColour  $greenColour*$endColour"
       echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
@@ -914,7 +933,9 @@ while true
 
       11 ) repairNetwork ;;
 
-      12 ) resetProgram ;;
+      12 ) showProject ;;
+
+      13 ) resetProgram ;;
 
       -h | --help ) panelHelp ;;
 
