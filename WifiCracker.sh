@@ -416,9 +416,9 @@ necessaryPrograms(){
     echo " "
     echo -e "$greenColour Tienes todos los programas necesarios...$endColour"
     echo " "
+    echo -e "$redColour Presione <Enter> para continuar$endColour"
+    read
   fi
-
-  sleep 2
 
   if [ "$airng" = "1" ]; then
     echo " "
