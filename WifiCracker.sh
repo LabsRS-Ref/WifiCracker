@@ -17,6 +17,10 @@
 
 value=1
 entrada=1
+macchg=0
+airng=0
+xdt=0
+
 greenColour="\e[0;32m\033[1m"
 endColour="\033[0m\e[0m"
 redColour="\e[0;31m\033[1m"
@@ -363,80 +367,143 @@ fakeAuth(){
 necessaryPrograms(){
 
   echo " "
-  echo -e "$greenColour Se va a instalar 'aircrack-ng' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
-  echo -n "-> "
-  read respuestaA
+  echo -e "$greenColour Vamos a ver qué programas tienes instalados y cuáles te faltan..$endColour."
+  sleep 3
 
-  case $respuestaA in
+  if [ ! -x /usr/bin/aircrack-ng ];then
 
-    Si | s | S | si ) echo " "
-         echo -e "$greenColour Comenzando la instalación...$endColour"
-         echo " "
-         sleep 2
-         sudo apt-get install aircrack-ng
-         echo " "
-         echo -e "$blueColour¡Instalación Terminada!$endColour"
-         echo " "
-         echo -e "$redColour Presione <Enter> para continuar$endColour"
-         read
-         ;;
+    echo " "
+  	echo -e "$blueColour Aircrack-ng:$endColour$redColour No Instalado$endColour"
+    airng=1
+  	sleep 0.4
 
-    No | n | no | No ) echo " "
-         echo -e "$redColour Instalación de 'aircrack-ng' cancelada...$endColour"
-         echo " "
-         sleep 3
-         ;;
-  esac
+  else
+  	echo " "
+  	echo -e "$blueColour Aircrack-ng:$endColour$greenColour Instalado$endColour"
+    airng=0
+  	sleep 0.4
+  fi
 
-  echo -e "$greenColour Se va a instalar 'macchanger' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
-  echo -n -e "$yellowColour-> $endColour"
-  read respuestaB
+  if [ ! -x /usr/bin/macchanger ];then
 
-  case $respuestaB in
+    echo " "
+  	echo -e "$blueColour Macchanger:$endColour$redColour No Instalado$endColour"
+    macchg=1
+  	sleep 0.4
 
-    Si | s | S | si ) echo " "
-         echo -e "$greenColour Comenzando la instalación...$endColour"
-         echo " "
-         sleep 2
-         sudo apt-get install macchanger
-         echo " "
-         echo -e "$blueColour¡Instalación Terminada!$endColour"
-         echo " "
-         echo -e "$redColour Presione <Enter> para continuar$endColour"
-         read
-         ;;
+  else
+  	echo " "
+  	echo -e "$blueColour Macchanger:$endColour$greenColour Instalado$endColour"
+    macchg=0
+  	sleep 0.4
+  fi
 
-    No | n | no | No ) echo " "
-         echo -e "$redColour Instalación de 'macchanger' cancelada... $endColour"
-         echo " "
-         sleep 3
-         ;;
-  esac
+  if [ ! -x /usr/bin/xdotool ];then
 
-  echo -e "$greenColour Se va a instalar 'xdotool' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
-  echo -n -e "$yellowColour-> $endColour"
-  read respuestaC
+    echo " "
+  	echo -e "$blueColour Xdotool:$endColour$redColour No Instalado$endColour"
+    xdt=1
+  	sleep 0.4
 
-  case $respuestaC in
+  else
+  	echo " "
+  	echo -e "$blueColour Xdotool:$endColour$greenColour Instalado$endColour"
+    xdt=0
+  	sleep 1
+  fi
 
-    Si | s | S | si) echo " "
-         echo -e "$greenColour Comenzando la instalación...$endColour"
-         echo " "
-         sleep 2
-         sudo apt-get install xdotool
-         echo " "
-         echo -e "$blueColour¡Instalación Terminada!$endColour"
-         echo " "
-         echo -e "$redColour Presione <Enter> para continuar$endColour"
-         read
-         ;;
+  if [ "$airng" = "0" ] && [ "$macchg" = "0" ] && [ "$xdt" = "0" ]; then
+    echo " "
+    echo -e "$greenColour Tienes todos los programas necesarios...$endColour"
+    echo " "
+  fi
 
-    No | n | no | No) echo " "
-         echo -e "$redColour Instalación de 'xdotool' cancelada... $endColour"
-         echo " "
-         sleep 3
-         ;;
-  esac
+  sleep 2
+
+  if [ "$airng" = "1" ]; then
+    echo " "
+    echo -e "$greenColour Se va a instalar 'aircrack-ng' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
+    echo -n "-> "
+    read respuestaA
+
+    case $respuestaA in
+
+      Si | s | S | si ) echo " "
+           echo -e "$greenColour Comenzando la instalación...$endColour"
+           echo " "
+           sleep 2
+           sudo apt-get install aircrack-ng
+           echo " "
+           echo -e "$blueColour¡Instalación Terminada!$endColour"
+           echo " "
+           echo -e "$redColour Presione <Enter> para continuar$endColour"
+           read
+           ;;
+
+      No | n | no | No ) echo " "
+           echo -e "$redColour Instalación de 'aircrack-ng' cancelada...$endColour"
+           echo " "
+           sleep 3
+           ;;
+    esac
+  fi
+
+  if [ "$macchg" = "1" ]; then
+    echo " "
+    echo -e "$greenColour Se va a instalar 'macchanger' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
+    echo -n -e "$yellowColour-> $endColour"
+    read respuestaB
+
+    case $respuestaB in
+
+      Si | s | S | si ) echo " "
+           echo -e "$greenColour Comenzando la instalación...$endColour"
+           echo " "
+           sleep 2
+           sudo apt-get install macchanger
+           echo " "
+           echo -e "$blueColour¡Instalación Terminada!$endColour"
+           echo " "
+           echo -e "$redColour Presione <Enter> para continuar$endColour"
+           read
+           ;;
+
+      No | n | no | No ) echo " "
+           echo -e "$redColour Instalación de 'macchanger' cancelada... $endColour"
+           echo " "
+           sleep 3
+           ;;
+    esac
+  fi
+
+  if [ "$xdt" = "1" ]; then
+
+    echo " "
+    echo -e "$greenColour Se va a instalar 'xdotool' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
+    echo -n -e "$yellowColour-> $endColour"
+    read respuestaC
+
+    case $respuestaC in
+
+      Si | s | S | si) echo " "
+           echo -e "$greenColour Comenzando la instalación...$endColour"
+           echo " "
+           sleep 2
+           sudo apt-get install xdotool
+           echo " "
+           echo -e "$blueColour¡Instalación Terminada!$endColour"
+           echo " "
+           echo -e "$redColour Presione <Enter> para continuar$endColour"
+           read
+           ;;
+
+      No | n | no | No) echo " "
+           echo -e "$redColour Instalación de 'xdotool' cancelada... $endColour"
+           echo " "
+           sleep 3
+           ;;
+    esac
+  fi
 
 }
 
