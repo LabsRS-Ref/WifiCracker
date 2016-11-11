@@ -21,6 +21,8 @@ macchg=0
 airng=0
 xdt=0
 nm=0
+entradaPrincipal=0
+
 var1=$(hostname -I | cut -d "." -f 1)
 var2=$(hostname -I | cut -d "." -f 2)
 var3=$(hostname -I | cut -d "." -f 3)
@@ -1129,7 +1131,11 @@ while true
       echo -e "$purpleColour----------------------------$endColour"
       echo " "
     fi
-
+    if [ "$(id -u)" != "0" ] && [ "$entradaPrincipal" == "0" ]; then
+      zenity --info --text="IMPORTANTE: La mayoría de funciones del programa sólo funcionan siendo superusuario. Has entrado como usuario normal."
+      entradaPrincipal=1
+      echo " "
+    fi
     echo -n -e "$yellowColour Introduzca una opcion -> $endColour"
     read opcionMenu
 
