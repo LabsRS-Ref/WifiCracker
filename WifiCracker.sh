@@ -582,6 +582,9 @@ showIP(){
   echo -n -e "$greenColour Tu IP pública es ->$endColour"
   GET http://www.vermiip.es/ | grep "Tu IP p&uacute;blica es" | cut -d ':' -f2 | cut -d '<' -f1
   echo " "
+  echo -n -e "$greenColour Tu IP privada es -> $endColour"
+  hostname -I
+  echo " "
   echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
   read
 
@@ -887,8 +890,8 @@ while true
       sleep 0.1
       echo -e "$purpleColour---------------------------------------------------$endColour"
       sleep 0.1
-      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour|$endColour"
-      echo -e "$purpleColour-------------------------------------$endColour"
+      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP$endColour $purpleColour|$endColour"
+      echo -e "$purpleColour----------------------------$endColour"
       sleep 0.5
       echo " "
       entrada=2
@@ -921,8 +924,8 @@ while true
       echo -e "$purpleColour---------------------------------------------------$endColour"
       echo -e "$grayColour [[-h | --help ] [-a | --author] [-v | --version]]$endColour$purpleColour|$endColour"
       echo -e "$purpleColour---------------------------------------------------$endColour"
-      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour|$endColour"
-      echo -e "$purpleColour-------------------------------------$endColour"
+      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP$endColour $purpleColour|$endColour"
+      echo -e "$purpleColour----------------------------$endColour"
       sleep 0.5
       echo " "
       entrada=3
@@ -955,8 +958,8 @@ while true
       echo -e "$purpleColour---------------------------------------------------$endColour"
       echo -e "$grayColour [[-h | --help ] [-a | --author] [-v | --version]]$endColour$purpleColour|$endColour"
       echo -e "$purpleColour---------------------------------------------------$endColour"
-      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour|$endColour"
-      echo -e "$purpleColour-------------------------------------$endColour"
+      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP$endColour $purpleColour|$endColour"
+      echo -e "$purpleColour----------------------------$endColour"
       sleep 0.5
       echo " "
       entrada=4
@@ -989,8 +992,8 @@ while true
       echo -e "$purpleColour---------------------------------------------------$endColour"
       echo -e "$grayColour [[-h | --help ] [-a | --author] [-v | --version]]$endColour$purpleColour|$endColour"
       echo -e "$purpleColour---------------------------------------------------$endColour"
-      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour|$endColour"
-      echo -e "$purpleColour-------------------------------------$endColour"
+      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP$endColour $purpleColour|$endColour"
+      echo -e "$purpleColour----------------------------$endColour"
       sleep 0.5
       echo " "
       entrada=5
@@ -1023,8 +1026,8 @@ while true
       echo -e "$purpleColour---------------------------------------------------$endColour"
       echo -e "$grayColour [[-h | --help ] [-a | --author] [-v | --version]]$endColour$purpleColour|$endColour"
       echo -e "$purpleColour---------------------------------------------------$endColour"
-      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP pública$endColour $purpleColour|$endColour"
-      echo -e "$purpleColour-------------------------------------$endColour"
+      echo -e "$redColour 0. Salir$endColour $blueColour||$endColour $grayColour? - Mostrar IP$endColour $purpleColour|$endColour"
+      echo -e "$purpleColour----------------------------$endColour"
       echo " "
     fi
 
