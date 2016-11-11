@@ -20,6 +20,9 @@ entrada=1
 macchg=0
 airng=0
 xdt=0
+var1=$(hostname -I | cut -d "." -f 1)
+var2=$(hostname -I | cut -d "." -f 2)
+var3=$(hostname -I | cut -d "." -f 3)
 
 greenColour="\e[0;32m\033[1m"
 endColour="\033[0m\e[0m"
@@ -837,6 +840,26 @@ openTerminal(){
 
 }
 
+connectedDevices(){
+
+  if [ "$(id -u)" = "0" ]; then
+    echo " "
+    echo -e "$greenColour Se van a listar los dispositivos conectados a la red$endColour ($redColour Debes estar conectado a la red $endColour)"
+    echo " "
+    sleep 4
+    nmap -sP $var1.$var2.$var3.1-254
+    echo " "
+    echo -e "$redColour Presione <Enter> para volver al menú principal$endColour"
+    read
+  else
+    echo " "
+    echo -e "$redColour Debes ser superusuario$endColour"
+    echo " "
+    exit 1
+  fi
+
+}
+
 
 while true
   do
@@ -863,13 +886,13 @@ while true
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
       sleep 0.1
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Dispositivos conectados      $endColour  $greenColour*$endColour"
       sleep 0.1
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
       sleep 0.1
-      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
       sleep 0.1
-      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour $blueColour 15$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
       sleep 0.1
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
       sleep 0.1
@@ -910,10 +933,10 @@ while true
       echo -e "$greenColour*****************************************************************************$endColour"
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Dispositivos conectados      $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour $blueColour 15$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  7$endColour.$yellowColour Obtener contraseña Wifi$endColour         $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
@@ -944,10 +967,10 @@ while true
       echo -e "$greenColour*****************************************************************************$endColour"
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Dispositivos conectados      $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour $blueColour 15$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  7$endColour.$yellowColour Obtener contraseña Wifi$endColour         $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
@@ -978,10 +1001,10 @@ while true
       echo -e "$greenColour*****************************************************************************$endColour"
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Dispositivos conectados      $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour $blueColour 15$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  7$endColour.$yellowColour Obtener contraseña Wifi$endColour         $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
@@ -1012,10 +1035,10 @@ while true
       echo -e "$greenColour*****************************************************************************$endColour"
       echo -e "                                                                            $greenColour*$endColour "
       echo -e "$blueColour  1$endColour.$yellowColour Iniciar el modo monitor$endColour         $blueColour||$endColour $blueColour 11$endColour.$yellowColour Reparar conexión de red      $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
-      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour                                     $greenColour*$endColour "
+      echo -e "$blueColour  2$endColour.$yellowColour Mostrar interfaces$endColour              $blueColour||$endColour $blueColour 12$endColour.$yellowColour Dispositivos conectados      $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  3$endColour.$yellowColour Dar de baja el modo monitor$endColour     $blueColour||$endColour $blueColour 13$endColour.$yellowColour Ver Proyecto                 $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  4$endColour.$yellowColour Escanear redes wifis$endColour            $blueColour||$endColour $blueColour 14$endColour.$yellowColour Abrir nueva terminal         $endColour  $greenColour*$endColour"
+      echo -e "$blueColour  5$endColour.$yellowColour Deautenticación a dirección MAC$endColour $blueColour||$endColour $blueColour 15$endColour.$yellowColour Reiniciar programa           $endColour  $greenColour*$endColour"
       echo -e "$blueColour  6$endColour.$yellowColour Falsa autenticación de cliente$endColour  $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  7$endColour.$yellowColour Obtener contraseña Wifi$endColour         $blueColour||$endColour                                     $greenColour*$endColour "
       echo -e "$blueColour  8$endColour.$yellowColour Mostrar dirección MAC (mon0)$endColour    $blueColour||$endColour                                     $greenColour*$endColour "
@@ -1058,11 +1081,13 @@ while true
 
       11 ) repairNetwork ;;
 
-      12 ) showProject ;;
+      12 ) connectedDevices ;;
 
-      13 ) openTerminal ;;
+      13 ) showProject ;;
 
-      14 ) resetProgram ;;
+      14 ) openTerminal ;;
+
+      15 ) resetProgram ;;
 
       -h | --help ) panelHelp ;;
 
