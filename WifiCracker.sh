@@ -85,7 +85,9 @@ monitorMode(){
       ifconfig mon0 up
       value=2
       echo -e "$blueColour ¡Terminado!$endColour"
-      sleep 3
+      echo " "
+      echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+      read
 
       # Si quisiéramos comprobar que nuestra dirección MAC ha sido cambiada, podemos
       # hacer uso del comando 'macchanger -s mon0'. Esta nos mostrará 2 direcciones MAC,
@@ -102,7 +104,8 @@ monitorMode(){
       echo " "
       echo -e "$redColour No es posible, ya estás en modo monitor$endColour"
       echo " "
-      sleep 4
+      echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+      read
     fi
   elif [ "$(id -u)" != "0" ]; then
     echo " "
@@ -131,7 +134,8 @@ interfacesMode(){
   sleep 4
   ifconfig
   echo " "
-  sleep 4
+  echo -e "$redColour Presiona <enter> para volver al menú principal"
+  read
 
 }
 
@@ -154,11 +158,14 @@ monitorDown(){
     echo " "
     echo -e "$blueColour Interfaz mon0 dada de baja con éxito$endColour"
     echo " "
-    sleep 4
     value=1
+    echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+    read
   else
     echo -e "$redColour No hay interfaz mon0, tienes que iniciarla con la opción 1$endColour"
-    sleep 3
+    echo " "
+    echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+    read
   fi
 
 }
@@ -227,7 +234,8 @@ wifiScanner(){
     echo " "
     echo -e "$redColour Inicia el modo monitor primero$endColour"
     echo " "
-    sleep 2
+    echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+    read
   fi
 
 }
@@ -404,7 +412,8 @@ autorInfo(){
   echo " "
   echo -e "$grayColour Programa hecho por Marcelo Raúl Vázquez Pereyra || Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
   echo " "
-  sleep 5
+  echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+  read
 
 }
 
@@ -413,7 +422,8 @@ versionSystem(){
   echo " "
   echo -e "$grayColour WifiCracker (v0.1.5) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
   echo " "
-  sleep 5
+  echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+  read
 
 }
 
@@ -453,26 +463,27 @@ panelHelp(){
   Por tanto, una vez hecho todo este proceso, mediante la opción 7 especificamos 2 rutas,
   por un lado la del Diccionario (que deberá ser puesto en el Escritorio) y por otro la del
   fichero '.cap' que se nos generó en la opción 4. El programa comenzará a trabajar hasta
-  averiguar la contraseña, la cual será mostrada en formato legible.
+  averiguar la contraseña, la cual será mostrada en formato legible.$endColour
 
-  Si te surgen dudas con alguna de las opciones, puedes usar '-h' acompañada de la opción
-  para ver qué función principal tiene la misma.$endColour
+ $blueColour Si te surgen dudas con alguna de las opciones, puedes usar '-h' acompañada de la opción
+  para ver qué función principal tiene la misma.
 
-$blueColour  Ejemplo -> '-h1, -h3, -h5...'$endColour
+  Ejemplo -> '-h1, -h3, -h5...'$endColour
 
 $greenColour**********************************************************************************************$endColour"
   echo " "
-  echo -n -e "$blueColour Pulse <Enter> para volver al menú principal $endColour"
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
   read
 }
 
 showIP(){
 
-echo " "
-echo -n -e "$greenColour Tu IP pública es ->$endColour"
-GET http://www.vermiip.es/ | grep "Tu IP p&uacute;blica es" | cut -d ':' -f2 | cut -d '<' -f1
-echo " "
-sleep 5
+  echo " "
+  echo -n -e "$greenColour Tu IP pública es ->$endColour"
+  GET http://www.vermiip.es/ | grep "Tu IP p&uacute;blica es" | cut -d ':' -f2 | cut -d '<' -f1
+  echo " "
+  echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+  read
 
 }
 
@@ -488,7 +499,8 @@ showMAC(){
   sleep 2
   macchanger -s mon0 | grep Current
   echo " "
-  sleep 4
+  echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+  read
 }
 
 changeMAC(){
@@ -510,7 +522,8 @@ changeMAC(){
   echo " "
   echo -e "$blueColour ¡Proceso Terminado!, puedes comprobar tu nueva dirección MAC a través de la opción 8$endColour"
   echo " "
-  sleep 4
+  echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+  read
 }
 
 monitorHelp(){
@@ -687,7 +700,6 @@ repairNetwork(){
   echo " "
   sleep 3
   service network-manager restart
-  echo " "
   echo -e "$blueColour ¡Terminado!$endColour"
   echo " "
   sleep 3
