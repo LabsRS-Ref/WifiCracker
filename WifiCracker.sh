@@ -20,6 +20,7 @@ entrada=1
 macchg=0
 airng=0
 xdt=0
+nm=0
 var1=$(hostname -I | cut -d "." -f 1)
 var2=$(hostname -I | cut -d "." -f 2)
 var3=$(hostname -I | cut -d "." -f 3)
@@ -418,7 +419,21 @@ necessaryPrograms(){
     	sleep 1
     fi
 
-    if [ "$airng" = "0" ] && [ "$macchg" = "0" ] && [ "$xdt" = "0" ]; then
+    if [ ! -x /usr/bin/nmap ];then
+
+      echo " "
+    	echo -e "$blueColour Nmap:$endColour$redColour No Instalado$endColour"
+      nm=1
+    	sleep 0.4
+
+    else
+    	echo " "
+    	echo -e "$blueColour Nmap:$endColour$greenColour Instalado$endColour"
+      nm=0
+    	sleep 1
+    fi
+
+    if [ "$airng" = "0" ] && [ "$macchg" = "0" ] && [ "$xdt" = "0" ] && [ "$nm" = "0" ]; then
       echo " "
       echo -e "$greenColour Tienes todos los programas necesarios...$endColour"
       echo " "
@@ -510,6 +525,34 @@ necessaryPrograms(){
              ;;
       esac
     fi
+
+    if [ "$nm" = "1" ]; then
+      echo " "
+      echo -e "$greenColour Se va a instalar 'Nmap' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
+      echo -n -e "$yellowColour-> $endColour"
+      read respuestaD
+
+      case $respuestaD in
+
+        Si | s | S | si ) echo " "
+             echo -e "$greenColour Comenzando la instalación...$endColour"
+             echo " "
+             sleep 2
+             sudo apt-get install nmap
+             echo " "
+             echo -e "$blueColour¡Instalación Terminada!$endColour"
+             echo " "
+             echo -e "$redColour Presione <Enter> para continuar$endColour"
+             read
+             ;;
+
+        No | n | no | No ) echo " "
+             echo -e "$redColour Instalación de 'Nmap' cancelada... $endColour"
+             echo " "
+             sleep 3
+             ;;
+      esac
+    fi
   else
     echo " "
     echo -e "$blueColour Debes tener conexión a internet$endColour"
@@ -533,7 +576,7 @@ autorInfo(){
 versionSystem(){
 
   echo " "
-  echo -e "$grayColour WifiCracker (v0.1.6) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
+  echo -e "$grayColour WifiCracker (v0.1.7) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
   echo " "
   echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
   read
@@ -879,6 +922,20 @@ connectedDevices(){
 
 }
 
+connectedDev(){
+
+  clear
+  echo -e "$blueColour Opción 12$endColour"
+  echo " "
+  echo -e "$yellowColour  A través de esta opción, realizarás un escaneo haciendo uso de la herramienta 'nmap' para ver
+  los dispositivos conectados en la red en la que previamente debes estar conectado.$endColour"
+  echo " "
+  echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+  read
+
+
+}
+
 
 while true
   do
@@ -894,7 +951,7 @@ while true
       sleep 0.1
       echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
       sleep 0.1
-      echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.6)$endColour           $greenColour*$endColour"
+      echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.7)$endColour           $greenColour*$endColour"
       sleep 0.1
       echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
       sleep 0.1
@@ -980,7 +1037,7 @@ while true
       echo -e "$redColour                        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗$endColour                            $greenColour*$endColour"
       echo -e "$redColour                        ║║║║║║─║╔╝║╔═╗║───────║║$endColour                            $greenColour*$endColour"
       echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
-      echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.6)$endColour           $greenColour*$endColour"
+      echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.7)$endColour           $greenColour*$endColour"
       echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
       echo -e "$redColour                        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝ $endColour                     $greenColour*$endColour"
       echo -e "$greenColour*****************************************************************************$endColour"
@@ -1048,7 +1105,7 @@ while true
       echo -e "$redColour                        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗$endColour                            $greenColour*$endColour"
       echo -e "$redColour                        ║║║║║║─║╔╝║╔═╗║───────║║$endColour                            $greenColour*$endColour"
       echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
-      echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.6)$endColour           $greenColour*$endColour"
+      echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.7)$endColour           $greenColour*$endColour"
       echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
       echo -e "$redColour                        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝ $endColour                     $greenColour*$endColour"
       echo -e "$greenColour*****************************************************************************$endColour"
@@ -1133,6 +1190,8 @@ while true
       -h9 ) changeMacHelp ;;
 
       -h11 ) repairNetworkHelp ;;
+
+      -h12 ) connectedDev ;;
 
       0 ) echo " "
       exit
