@@ -836,12 +836,26 @@ wifiPasswordHelp(){
     echo -e "$blueColour Opción 7$endColour"
     echo " "
     echo -e "$yellowColour  A través de esta opción comienza el ataque por fuerza bruta a la contraseña del Wifi que queremos averiguar. Para ello
-    tendremos que hacer uso de un Diccionario. A más grande sea el diccionario que poseas, mayor probabilidad hay de que encuentres la contraseña.
-    Trabajamos con grandes datos, en ocasiones con diccionarios de 227 millones de palabras, por lo que dependiendo de la CPU de tu ordenador,
-    será capaz de analizar más o menos palabras por segundo. Lo mejor ante estos casos es hacer uso de un supercomputador para obtener en cuestión
-    de segundos la contraseña."
+  tendremos que hacer uso de un Diccionario. A más grande sea el diccionario que poseas, mayor probabilidad hay de que encuentres la contraseña.
+  Trabajamos con grandes datos, en ocasiones con diccionarios de 227 millones de palabras, por lo que dependiendo de la CPU de tu ordenador,
+  será capaz de analizar más o menos palabras por segundo. Lo mejor ante estos casos es hacer uso de un supercomputador para obtener en cuestión
+  de segundos la contraseña."
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Option 7$endColour"
+    echo " "
+    echo -e "$yellowColour  Through this option the brute force attack with the wifi's password we want to find out begins. For that
+  we will have to make use of a Dictionary. The larger the dictionary you own, the more likely you are to find the password.
+  We work with big data, sometimes with dictionaries of 227 million words, so... depending of your CPU computer, you will be able
+  to analyze more or less words per second. The best thing in these cases is to make use of a supercomputer to obtain passwords in
+  seconds."
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
   fi
 
@@ -854,8 +868,8 @@ showMacHelp(){
     echo -e "$blueColour Opción 8$endColour"
     echo " "
     echo -e "$yellowColour  Esta opción nos permitirá ver cuál es nuestra dirección MAC. Obviamente, la dirección mostrada es la falsa creada
-    una vez hemos iniciado el modo monitor. A través de la opción 9 podremos cambiarla continuamente siempre que queramos sin ningún tipo
-    de problema$endColour"
+  una vez hemos iniciado el modo monitor. A través de la opción 9 podremos cambiarla continuamente siempre que queramos sin ningún tipo
+  de problema$endColour"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
@@ -882,8 +896,8 @@ changeMacHelp(){
     echo -e "$blueColour Opción 9$endColour"
     echo " "
     echo -e "$yellowColour  Esta opción nos otorga cambiar nuestra dirección MAC en el modo monitor previamente creado desde la opción 1.
-    Todas las direcciones MAC creadas desde esta opción del menú son falsas, hacemos estos cambios para evitar ser detectados en caso de
-    haber algún tipo de problema$endColour"
+  Todas las direcciones MAC creadas desde esta opción del menú son falsas, hacemos estos cambios para evitar ser detectados en caso de
+  haber algún tipo de problema$endColour"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
@@ -910,7 +924,7 @@ repairNetworkHelp(){
     echo -e "$blueColour Opción 11$endColour"
     echo " "
     echo -e "$yellowColour  En ocasiones, el programa tal vez te deshabilite el icono de las redes Wifis situado en la esquina superior derecha
-    de tu pantalla. Esto podrás arreglarlo fácilmente a través de esta opción.$endColour"
+  de tu pantalla. Esto podrás arreglarlo fácilmente a través de esta opción.$endColour"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
