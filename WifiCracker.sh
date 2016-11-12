@@ -810,20 +810,38 @@ macAttackHelp(){
 
 fakeAuthHelp(){
 
+
   if [ "$spanOptions" = "1" ]; then
     clear
     echo -e "$blueColour Opción 6$endColour"
     echo " "
     echo -e "$yellowColour  En ocasiones, ningún usuario estará conectado a la red... por lo que si queremos averiguar la contraseña del Wifi, nos
-    será imposible. Pero no imposible del todo, por ello nos encargamos de engañar al routter haciéndole creer que hay un usuario conectado. De esta
-    manera podremos realizar el procedimiento como si se tratara de un usuario normal y corriente, después de haberlo creado.
+  será imposible. Pero no imposible del todo, por ello nos encargamos de engañar al routter haciéndole creer que hay un usuario conectado. De esta
+  manera podremos realizar el procedimiento como si se tratara de un usuario normal y corriente, después de haberlo creado.
 
-    Generalmente, lo mejor es utilizar a un usuario cualquiera que el programa nos detecte al escanear las redes, el cual no esté asociado a ninguna
-    red. Lo utilizamos para asociarlo a la que queremos falsamente.
-    También podemos usar nuestra propia dirección MAC (la falsa) para evitar tener que autenticar a otros. Podremos ver en todo momento qué dirección
-    MAC tenemos en el monitor que hemos creado a través de la opción 8."
+  Generalmente, lo mejor es utilizar a un usuario cualquiera que el programa nos detecte al escanear las redes, el cual no esté asociado a ninguna
+  red. Lo utilizamos para asociarlo a la que queremos falsamente.
+  También podemos usar nuestra propia dirección MAC (la falsa) para evitar tener que autenticar a otros. Podremos ver en todo momento qué dirección
+  MAC tenemos en el monitor que hemos creado a través de la opción 8."
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Option 6$endColour"
+    echo " "
+    echo -e "$yellowColour  Sometimes, no users will be connected to the network ... so if we want to find out the Wifi's password,
+  it will be impossible. But not impossible at all, so we take care of fooling the routter by making him believe that a user is connected. From this
+  way we can perform the procedure as if it were a normal user, after having created it.
+
+  Generally, it's best to use any user that the program detects when scanning the networks, which is not associated with any network. We use it to
+  associate it with what we falsely want.
+  We can also use our own (false) MAC address to avoid having to authenticate others. We can see at all times which direction MAC we have in the
+  monitor that we created through option 8."
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
   fi
 
@@ -1072,7 +1090,7 @@ connectedDev(){
     echo -e "$blueColour Opción 12$endColour"
     echo " "
     echo -e "$yellowColour  A través de esta opción, realizarás un escaneo haciendo uso de la herramienta 'nmap' para ver
-    los dispositivos conectados en la red en la que previamente debes estar conectado.$endColour"
+  los dispositivos conectados en la red en la que previamente debes estar conectado.$endColour"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
