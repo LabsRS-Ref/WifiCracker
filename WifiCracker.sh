@@ -918,7 +918,7 @@ connectedDev(){
 
 
 }
-
+clear
 echo " "
 echo -n -e "$blueColour Seleccione un idioma ($greenColour English$endColour /$redColour Español$endColour ): $endColour"
 read language
