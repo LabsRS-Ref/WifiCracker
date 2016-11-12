@@ -644,7 +644,7 @@ panelHelp(){
 
   $greenColour**********************************************************************************************$endColour"
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
   fi
 }
@@ -725,7 +725,7 @@ monitorHelp(){
 
     Debe ser la primera opción que escojamos.$endColour"
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
   fi
 
@@ -746,7 +746,7 @@ interfacesHelp(){
     Podremos comprobar si estamos en modo monitor siempre que veamos una nueva interfaz llamada 'mon0'. En caso contrario, podrá
     resultar que la tenemos dada de baja o bien no la hemos creado, por tanto tendremos que acudir a la opción 1 para crearla.$endColour"
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
   fi
 
@@ -766,7 +766,7 @@ monitorDownHelp(){
     En resúmen, con esta opción lo eliminamos completamente. Si queremos volver a darlo de alta, tendremos que usar la opción 1 nuevamente
     para crear un nuevo modo monitor."
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
   fi
 }
@@ -780,7 +780,7 @@ wifiScannerHelp(){
     echo -e "$yellowColour  Simple escaneo de redes Wifi disponibles en nuestro entorno. Importante tener en cuenta que si no estamos en modo
     monitor, no seremos capaces de capturar nada."
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
   fi
 
@@ -802,7 +802,7 @@ macAttackHelp(){
     El 'ataque' de de-autenticación terminará hasta que nosotros queramos. Es decir, el usuario no podrá volverse a conectar a la red hasta que
     nosotros paremos el envío de paquetes"
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
   fi
 
@@ -823,7 +823,7 @@ fakeAuthHelp(){
     También podemos usar nuestra propia dirección MAC (la falsa) para evitar tener que autenticar a otros. Podremos ver en todo momento qué dirección
     MAC tenemos en el monitor que hemos creado a través de la opción 8."
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
   fi
 
@@ -841,7 +841,7 @@ wifiPasswordHelp(){
     será capaz de analizar más o menos palabras por segundo. Lo mejor ante estos casos es hacer uso de un supercomputador para obtener en cuestión
     de segundos la contraseña."
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
   fi
 
@@ -857,7 +857,19 @@ showMacHelp(){
     una vez hemos iniciado el modo monitor. A través de la opción 9 podremos cambiarla continuamente siempre que queramos sin ningún tipo
     de problema$endColour"
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Option 8$endColour"
+    echo " "
+    echo -e "$yellowColour  This option will allow us to see our MAC adress. Obviously, the direction shown is fake... created
+  once we have started the monitor mode. Through option 9 we can change it continuously whenever we want without any type
+  of problem$endColour"
+    echo " "
+    echo -e "$redColour Press <Enter> to return to the main menu$endColour"
     read
   fi
 
@@ -873,7 +885,19 @@ changeMacHelp(){
     Todas las direcciones MAC creadas desde esta opción del menú son falsas, hacemos estos cambios para evitar ser detectados en caso de
     haber algún tipo de problema$endColour"
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Option 9$endColour"
+    echo " "
+    echo -e "$yellowColour  This option allows us to change our MAC address in the monitor mode previously created from option 1.
+  All MAC addresses created from this menu option are fake. We make these changes to avoid being detected in case of having any
+  type of problem$endColour"
+    echo " "
+    echo -e "$redColour Press <Enter> to return to the main menu$endColour"
     read
   fi
 
@@ -888,7 +912,18 @@ repairNetworkHelp(){
     echo -e "$yellowColour  En ocasiones, el programa tal vez te deshabilite el icono de las redes Wifis situado en la esquina superior derecha
     de tu pantalla. Esto podrás arreglarlo fácilmente a través de esta opción.$endColour"
     echo " "
-    echo -n -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Option 11$endColour"
+    echo " "
+    echo -e "$yellowColour  Sometimes the program may disable the Wifi's Networks icon in the upper right corner
+  of your screen. You can easily fix it through this option.$endColour"
+    echo " "
+    echo -e "$redColour Press <Enter> to return to the main menu$endColour"
     read
   fi
 
@@ -903,6 +938,17 @@ repairNetwork(){
     sleep 3
     service network-manager restart
     echo -e "$blueColour ¡Terminado!$endColour"
+    echo " "
+    sleep 3
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$greenColour Re-establishing the network scanner of your computer...$endColour"
+    echo " "
+    sleep 3
+    service network-manager restart
+    echo -e "$blueColour ¡Finished!$endColour"
     echo " "
     sleep 3
   fi
@@ -927,6 +973,22 @@ showProject(){
     fi
   fi
 
+  if [ "$engOptions" = "1" ]; then
+    if [ "$(id -u)" != "0" ]; then
+      echo " "
+      echo -e "$blueColour Opening Browser...$endColour"
+      echo " "
+      sleep 3
+      chromium-browser https://github.com/Marcelorvp/WifiCracker
+      sleep 3
+    else
+      echo " "
+      echo -e "$redColour This option must be executed as normal user$endColour"
+      echo " "
+      sleep 4
+    fi
+  fi
+
 }
 
 openTerminal(){
@@ -934,6 +996,14 @@ openTerminal(){
   if [ "$spanOptions" = "1" ]; then
     echo " "
     echo -e "$greenColour Se va a abrir una nueva terminal...$endColour"
+    echo " "
+    sleep 3
+    xdotool key ctrl+alt+t
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$greenColour A new terminal will be opened...$endColour"
     echo " "
     sleep 3
     xdotool key ctrl+alt+t
@@ -1596,4 +1666,8 @@ elif [ "$language" = "English" ]; then
             ;;
       esac
   done
+else
+  echo " "
+  echo -e "$redColour Has introducido mal el idioma$endColour"
+  echo " "
 fi
