@@ -372,195 +372,185 @@ fakeAuth(){
 
 necessaryPrograms(){
 
-  if ping -c1 google.com &>/dev/null;
-  then
+  echo " "
+  echo -e "$greenColour Vamos a ver qué programas tienes instalados y cuáles te faltan..$endColour."
+  sleep 3
+
+  if [ ! -x /usr/bin/aircrack-ng ];then
 
     echo " "
-    echo -e "$greenColour Vamos a ver qué programas tienes instalados y cuáles te faltan..$endColour."
-    sleep 3
+  	echo -e "$blueColour Aircrack-ng:$endColour$redColour No Instalado$endColour"
+    airng=1
+  	sleep 0.4
 
-    if [ ! -x /usr/bin/aircrack-ng ];then
-
-      echo " "
-    	echo -e "$blueColour Aircrack-ng:$endColour$redColour No Instalado$endColour"
-      airng=1
-    	sleep 0.4
-
-    else
-    	echo " "
-    	echo -e "$blueColour Aircrack-ng:$endColour$greenColour Instalado$endColour"
-      airng=0
-    	sleep 0.4
-    fi
-
-    if [ ! -x /usr/bin/macchanger ];then
-
-      echo " "
-    	echo -e "$blueColour Macchanger:$endColour$redColour No Instalado$endColour"
-      macchg=1
-    	sleep 0.4
-
-    else
-    	echo " "
-    	echo -e "$blueColour Macchanger:$endColour$greenColour Instalado$endColour"
-      macchg=0
-    	sleep 0.4
-    fi
-
-    if [ ! -x /usr/bin/xdotool ];then
-
-      echo " "
-    	echo -e "$blueColour Xdotool:$endColour$redColour No Instalado$endColour"
-      xdt=1
-    	sleep 0.4
-
-    else
-    	echo " "
-    	echo -e "$blueColour Xdotool:$endColour$greenColour Instalado$endColour"
-      xdt=0
-    	sleep 1
-    fi
-
-    if [ ! -x /usr/bin/nmap ];then
-
-      echo " "
-    	echo -e "$blueColour Nmap:$endColour$redColour No Instalado$endColour"
-      nm=1
-    	sleep 0.4
-
-    else
-    	echo " "
-    	echo -e "$blueColour Nmap:$endColour$greenColour Instalado$endColour"
-      nm=0
-    	sleep 1
-    fi
-
-    if [ "$airng" = "0" ] && [ "$macchg" = "0" ] && [ "$xdt" = "0" ] && [ "$nm" = "0" ]; then
-      echo " "
-      echo -e "$greenColour Tienes todos los programas necesarios...$endColour"
-      echo " "
-      echo -e "$redColour Presione <Enter> para continuar$endColour"
-      read
-    fi
-
-    if [ "$airng" = "1" ]; then
-      echo " "
-      echo -e "$greenColour Se va a instalar 'aircrack-ng' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
-      echo -n "-> "
-      read respuestaA
-
-      case $respuestaA in
-
-        Si | s | S | si ) echo " "
-             echo -e "$greenColour Comenzando la instalación...$endColour"
-             echo " "
-             sleep 2
-             sudo apt-get install aircrack-ng
-             echo " "
-             echo -e "$blueColour¡Instalación Terminada!$endColour"
-             echo " "
-             echo -e "$redColour Presione <Enter> para continuar$endColour"
-             read
-             ;;
-
-        No | n | no | No ) echo " "
-             echo -e "$redColour Instalación de 'aircrack-ng' cancelada...$endColour"
-             echo " "
-             sleep 3
-             ;;
-      esac
-    fi
-
-    if [ "$macchg" = "1" ]; then
-      echo " "
-      echo -e "$greenColour Se va a instalar 'macchanger' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
-      echo -n -e "$yellowColour-> $endColour"
-      read respuestaB
-
-      case $respuestaB in
-
-        Si | s | S | si ) echo " "
-             echo -e "$greenColour Comenzando la instalación...$endColour"
-             echo " "
-             sleep 2
-             sudo apt-get install macchanger
-             echo " "
-             echo -e "$blueColour¡Instalación Terminada!$endColour"
-             echo " "
-             echo -e "$redColour Presione <Enter> para continuar$endColour"
-             read
-             ;;
-
-        No | n | no | No ) echo " "
-             echo -e "$redColour Instalación de 'macchanger' cancelada... $endColour"
-             echo " "
-             sleep 3
-             ;;
-      esac
-    fi
-
-    if [ "$xdt" = "1" ]; then
-
-      echo " "
-      echo -e "$greenColour Se va a instalar 'xdotool' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
-      echo -n -e "$yellowColour-> $endColour"
-      read respuestaC
-
-      case $respuestaC in
-
-        Si | s | S | si) echo " "
-             echo -e "$greenColour Comenzando la instalación...$endColour"
-             echo " "
-             sleep 2
-             sudo apt-get install xdotool
-             echo " "
-             echo -e "$blueColour¡Instalación Terminada!$endColour"
-             echo " "
-             echo -e "$redColour Presione <Enter> para continuar$endColour"
-             read
-             ;;
-
-        No | n | no | No) echo " "
-             echo -e "$redColour Instalación de 'xdotool' cancelada... $endColour"
-             echo " "
-             sleep 3
-             ;;
-      esac
-    fi
-
-    if [ "$nm" = "1" ]; then
-      echo " "
-      echo -e "$greenColour Se va a instalar 'Nmap' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
-      echo -n -e "$yellowColour-> $endColour"
-      read respuestaD
-
-      case $respuestaD in
-
-        Si | s | S | si ) echo " "
-             echo -e "$greenColour Comenzando la instalación...$endColour"
-             echo " "
-             sleep 2
-             sudo apt-get install nmap
-             echo " "
-             echo -e "$blueColour¡Instalación Terminada!$endColour"
-             echo " "
-             echo -e "$redColour Presione <Enter> para continuar$endColour"
-             read
-             ;;
-
-        No | n | no | No ) echo " "
-             echo -e "$redColour Instalación de 'Nmap' cancelada... $endColour"
-             echo " "
-             sleep 3
-             ;;
-      esac
-    fi
   else
+  	echo " "
+  	echo -e "$blueColour Aircrack-ng:$endColour$greenColour Instalado$endColour"
+    airng=0
+  	sleep 0.4
+  fi
+
+  if [ ! -x /usr/bin/macchanger ];then
+
     echo " "
-    echo -e "$blueColour Debes tener conexión a internet$endColour"
+  	echo -e "$blueColour Macchanger:$endColour$redColour No Instalado$endColour"
+    macchg=1
+  	sleep 0.4
+
+  else
+  	echo " "
+  	echo -e "$blueColour Macchanger:$endColour$greenColour Instalado$endColour"
+    macchg=0
+  	sleep 0.4
+  fi
+
+  if [ ! -x /usr/bin/xdotool ];then
+
     echo " "
-    echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+  	echo -e "$blueColour Xdotool:$endColour$redColour No Instalado$endColour"
+    xdt=1
+  	sleep 0.4
+
+  else
+  	echo " "
+  	echo -e "$blueColour Xdotool:$endColour$greenColour Instalado$endColour"
+    xdt=0
+  	sleep 1
+  fi
+
+  if [ ! -x /usr/bin/nmap ];then
+
+    echo " "
+  	echo -e "$blueColour Nmap:$endColour$redColour No Instalado$endColour"
+    nm=1
+  	sleep 0.4
+
+  else
+  	echo " "
+  	echo -e "$blueColour Nmap:$endColour$greenColour Instalado$endColour"
+    nm=0
+  	sleep 1
+  fi
+
+  if [ "$airng" = "0" ] && [ "$macchg" = "0" ] && [ "$xdt" = "0" ] && [ "$nm" = "0" ]; then
+    echo " "
+    echo -e "$greenColour Tienes todos los programas necesarios...$endColour"
+    echo " "
+    echo -e "$redColour Presione <Enter> para continuar$endColour"
     read
+  fi
+
+  if [ "$airng" = "1" ]; then
+    echo " "
+    echo -e "$greenColour Se va a instalar 'aircrack-ng' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
+    echo -n "-> "
+    read respuestaA
+
+    case $respuestaA in
+
+      Si | s | S | si ) echo " "
+           echo -e "$greenColour Comenzando la instalación...$endColour"
+           echo " "
+           sleep 2
+           sudo apt-get install aircrack-ng
+           echo " "
+           echo -e "$blueColour¡Instalación Terminada!$endColour"
+           echo " "
+           echo -e "$redColour Presione <Enter> para continuar$endColour"
+           read
+           ;;
+
+      No | n | no | No ) echo " "
+           echo -e "$redColour Instalación de 'aircrack-ng' cancelada...$endColour"
+           echo " "
+           sleep 3
+           ;;
+    esac
+  fi
+
+  if [ "$macchg" = "1" ]; then
+    echo " "
+    echo -e "$greenColour Se va a instalar 'macchanger' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
+    echo -n -e "$yellowColour-> $endColour"
+    read respuestaB
+
+    case $respuestaB in
+
+      Si | s | S | si ) echo " "
+           echo -e "$greenColour Comenzando la instalación...$endColour"
+           echo " "
+           sleep 2
+           sudo apt-get install macchanger
+           echo " "
+           echo -e "$blueColour¡Instalación Terminada!$endColour"
+           echo " "
+           echo -e "$redColour Presione <Enter> para continuar$endColour"
+           read
+           ;;
+
+      No | n | no | No ) echo " "
+           echo -e "$redColour Instalación de 'macchanger' cancelada... $endColour"
+           echo " "
+           sleep 3
+           ;;
+    esac
+  fi
+
+  if [ "$xdt" = "1" ]; then
+
+    echo " "
+    echo -e "$greenColour Se va a instalar 'xdotool' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
+    echo -n -e "$yellowColour-> $endColour"
+    read respuestaC
+
+    case $respuestaC in
+
+      Si | s | S | si) echo " "
+           echo -e "$greenColour Comenzando la instalación...$endColour"
+           echo " "
+           sleep 2
+           sudo apt-get install xdotool
+           echo " "
+           echo -e "$blueColour¡Instalación Terminada!$endColour"
+           echo " "
+           echo -e "$redColour Presione <Enter> para continuar$endColour"
+           read
+           ;;
+
+      No | n | no | No) echo " "
+           echo -e "$redColour Instalación de 'xdotool' cancelada... $endColour"
+           echo " "
+           sleep 3
+           ;;
+    esac
+  fi
+
+  if [ "$nm" = "1" ]; then
+    echo " "
+    echo -e "$greenColour Se va a instalar 'Nmap' en tu ordenador, ¿quiere continuar?$endColour $blueColour(Si/No)$endColour"
+    echo -n -e "$yellowColour-> $endColour"
+    read respuestaD
+
+    case $respuestaD in
+
+      Si | s | S | si ) echo " "
+           echo -e "$greenColour Comenzando la instalación...$endColour"
+           echo " "
+           sleep 2
+           sudo apt-get install nmap
+           echo " "
+           echo -e "$blueColour¡Instalación Terminada!$endColour"
+           echo " "
+           echo -e "$redColour Presione <Enter> para continuar$endColour"
+           read
+           ;;
+
+      No | n | no | No ) echo " "
+           echo -e "$redColour Instalación de 'Nmap' cancelada... $endColour"
+           echo " "
+           sleep 3
+           ;;
+    esac
   fi
 
 }
@@ -897,29 +887,20 @@ openTerminal(){
 
 connectedDevices(){
 
-  if ping -c1 google.com &>/dev/null;
-  then
-    if [ "$(id -u)" = "0" ]; then
-      echo " "
-      echo -e "$greenColour Se van a listar los dispositivos conectados a la red$endColour"
-      echo " "
-      sleep 4
-      nmap -sP $var1.$var2.$var3.1-254
-      echo " "
-      echo -e "$redColour Presione <Enter> para volver al menú principal$endColour"
-      read
-    else
-      echo " "
-      echo -e "$redColour Debes ser superusuario$endColour"
-      echo " "
-      exit 1
-    fi
-  else
+  if [ "$(id -u)" = "0" ]; then
     echo " "
-    echo -e "$blueColour Debes tener conexión a internet"
+    echo -e "$greenColour Se van a listar los dispositivos conectados a la red$endColour"
+    echo " "
+    sleep 4
+    nmap -sP $var1.$var2.$var3.1-254
     echo " "
     echo -e "$redColour Presione <Enter> para volver al menú principal$endColour"
     read
+  else
+    echo " "
+    echo -e "$redColour Debes ser superusuario$endColour"
+    echo " "
+    exit 1
   fi
 
 }
