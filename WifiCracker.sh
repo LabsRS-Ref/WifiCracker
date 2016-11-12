@@ -173,7 +173,7 @@ monitorDown(){
     echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
     read
   else
-    echo -e "$redColour No hay interfaz mon0, tienes que iniciarla con la opción 1$endColour"
+    echo -e "$blueColour No hay interfaz mon0, tienes que iniciarla con la opción 1$endColour"
     echo " "
     echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
     read
@@ -262,7 +262,6 @@ wifiPassword(){
 
   echo " "
   echo -e "$redColour Esta opción sólo deberías ejecutarla si ya has hecho los pasos 1, 4 y 5... de lo contrario no obtendrás nada$endColour"
-  echo " "
   sleep 3
   echo " "
   echo -n -e "$yellowColour Nombre del diccionario (póngalo en el escritorio, con extensión correspondiente): $endColour"
@@ -1120,15 +1119,15 @@ while true
     fi
     if [ "$typeUser" = "0" ]; then
       if [ "$(id -u)" = "0" ]; then
-        echo -e "$grayColour //////////////////////////////////////$endColour"
+        echo -e "$grayColour ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$endColour"
         echo -e "$blueColour Has entrado como:$endColour$greenColour $USER$endColour -$redColour Superusuario$endColour"
-        echo -e "$grayColour //////////////////////////////////////$endColour"
+        echo -e "$grayColour ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$endColour"
         echo " "
         typeUser=1
       elif [ "$(id -u)" != "0" ]; then
-        echo -e "$grayColour ///////////////////////////////////////////////$endColour"
+        echo -e "$grayColour ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$endColour"
         echo -e "$blueColour Has entrado como:$endColour$greenColour $USER$endColour $redColour- Usuario Normal$endColour"
-        echo -e "$grayColour ///////////////////////////////////////////////$endColour"
+        echo -e "$grayColour ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$endColour"
         echo " "
         typeUser=1
       fi
