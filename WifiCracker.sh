@@ -22,6 +22,7 @@ airng=0
 xdt=0
 nm=0
 entradaPrincipal=0
+typeUser=0
 
 var1=$(hostname -I | cut -d "." -f 1)
 var2=$(hostname -I | cut -d "." -f 2)
@@ -1116,6 +1117,21 @@ while true
       zenity --info --text="IMPORTANTE: La mayoría de funciones del programa sólo funcionan siendo superusuario. Has entrado como usuario normal."
       entradaPrincipal=1
       echo " "
+    fi
+    if [ "$typeUser" = "0" ]; then
+      if [ "$(id -u)" = "0" ]; then
+        echo -e "$grayColour //////////////////////////////////////$endColour"
+        echo -e "$blueColour Has entrado como:$endColour$greenColour $USER$endColour -$redColour Superusuario$endColour"
+        echo -e "$grayColour //////////////////////////////////////$endColour"
+        echo " "
+        typeUser=1
+      elif [ "$(id -u)" != "0" ]; then
+        echo -e "$grayColour ///////////////////////////////////////////////$endColour"
+        echo -e "$blueColour Has entrado como:$endColour$greenColour $USER$endColour $redColour- Usuario Normal$endColour"
+        echo -e "$grayColour ///////////////////////////////////////////////$endColour"
+        echo " "
+        typeUser=1
+      fi
     fi
     echo -n -e "$yellowColour Introduzca una opcion -> $endColour"
     read opcionMenu
