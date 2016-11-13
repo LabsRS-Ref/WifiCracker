@@ -26,10 +26,12 @@ typeUser=0
 engOptions=0
 spanOptions=0
 
+#Private IP Adress [hostname -I | Particular stored values]
 var1=$(hostname -I | cut -d "." -f 1)
 var2=$(hostname -I | cut -d "." -f 2)
 var3=$(hostname -I | cut -d "." -f 3)
 
+#Colours
 greenColour="\e[0;32m\033[1m"
 endColour="\033[0m\e[0m"
 redColour="\e[0;31m\033[1m"
