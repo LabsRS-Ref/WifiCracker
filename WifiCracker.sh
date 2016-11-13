@@ -128,6 +128,90 @@ monitorMode(){
       exit 1
     fi
   fi
+
+  if [ "$engOptions" = "1" ]; then
+    if [ "$(id -u)" = "0" ]; then
+      echo " "
+      echo -e "$greenColour Opening Interface Settings...$endColour"
+      echo " "
+      sleep 2
+      ifconfig
+      echo " "
+      echo -n -e "$yellowColour Enter your Wifi network card (wlan0, wlp2s0, ...): $endColour"
+      read tarjetaRed
+      echo " "
+      echo -e "$greenColour Starting monitor mode...$endColour"
+      sleep 2
+
+      if [ "$value" = "1" ]; then
+
+        # Al habilitar el modo monitor, capturamos y escuchamos cualquier tipo de
+        # paquete que viaje por el aire. También capturamos no sólo a aquellos clientes
+        # que estén conectados a la red, también los no asociados a ninguna (con sus
+        # respectivas direcciones MAC).
+
+        # Enabling monitor mode, we can capture and hear any kind of package travelling
+        # in the air. Also we capture not only those users connected to the network,
+        # also not-associated clientes (with their respectives MAC addresses).
+
+        airmon-ng start $tarjetaRed
+        value=2
+        echo " "
+        echo -e "$greenColour Disabling 'mon0' interface$endColour"
+        echo " "
+        sleep 2
+        ifconfig mon0 down
+        echo -e "$greenColour Changing MAC Address...$endColour"
+        echo " "
+        sleep 2
+
+        # A continuación vamos a cambiar nuestra dirección MAC, esto lo haremos para
+        # realizar el 'ataque' de manera más segura en modo monitor. Para ello, siempre
+        # que queramos realizar algún cambio en una interfaz, primero tenemos que darla
+        # de baja. Posteriormente, al realizar los cambios... esta tendrá que ser
+        # nuevamente dada de alta.
+
+        # Next we are going to change our MAC address, we will do it for doing a safe
+        # 'attack' on monitor mode. Whenever we want to make a change in an interface, first
+        # we have to disable it. Later, when making changes ... this will have to be re-released.
+
+        macchanger -a mon0
+        echo " "
+        echo -e "$greenColour Enabling 'mon0' interface$endColour"
+        echo " "
+        sleep 2
+        ifconfig mon0 up
+        value=2
+        echo -e "$blueColour Finished!$endColour"
+        echo " "
+        echo -e "$redColour Press <Enter> to return to the main menu$endColour"
+        read
+
+        # Si quisiéramos comprobar que nuestra dirección MAC ha sido cambiada, podemos
+        # hacer uso del comando 'macchanger -s mon0'. Esta nos mostrará 2 direcciones MAC,
+        # una de ellas es la 'New MAC' que corresponde a la que el programa 'macchanger' nos
+        # ha asignado aleatoriamente, la otra es la 'Permanent MAC', que corresponde a aquella
+        # que nos volverá a ser otorgada una vez paremos el modo monitor, es decir... la misma
+        # que teníamos desde un principio.
+
+        # If we wanted to see if our MAC address has been changed, we can use 'macchanger -s mon0'.
+        # This show us 2 MAC addresses, first is 'New MAC' corresponding to the random MAC program itself offers.
+        # Second is 'Permanent MAC', corresponding to our real MAC adress, it will be refunded once we finish the process.
+
+      else
+        echo " "
+        echo -e "$redColour Not possible, you are already in monitor mode$endColour"
+        echo " "
+        echo -e "$redColour Press <Enter> to return to the main menu$endColour"
+        read
+      fi
+    elif [ "$(id -u)" != "0" ]; then
+      echo " "
+      echo -e "$redColour This must be executed as superuser$endColour"
+      echo " "
+      exit 1
+    fi
+  fi
 }
 
 interfacesMode(){
@@ -150,7 +234,7 @@ interfacesMode(){
     sleep 4
     ifconfig
     echo " "
-    echo -e "$redColour Presiona <enter> para volver al menú principal$endColour"
+    echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
     read
   fi
 
@@ -1058,6 +1142,50 @@ panelHelp(){
 $greenColour**********************************************************************************************$endColour"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo " "
+    echo -e "$greenColour*******************************************************************************************$endColour"
+    echo -e "$yellowColour The first step is to start the monitor mode through option 1. Once the monitor mode is started...
+  you are able to listen and capture any package that travels through the air.
+
+  You can check via option 2 if you have successfully started the monitor interface.
+  Later on, you will analyze WiFis networks available in your environment using option 4. You will get both authenticated
+  clients to a network and not associated with any. Each client is located in 'STATION' and they have a MAC address. These will
+  show that they are connected to a MAC address, corresponding to that of the routter (BSSID). You can see to which WiFi
+  corresponds by looking at their corresponding 'ESSID'.
+
+  The program will allow you to filter the WiFi network you want, isolating the rest by passing the parameter name. If the
+  same network comes out several times, that's because there are signal distributors. Once this is done a new folder will be
+  created in the Desktop with the name you want, it will contain several files ... among which will travel encrypted
+  information, including the password of the routter. The one that interests us is the extension '.cap'.
+
+
+  Once the folders and files are created, you proceed to de-authenticate the users of the network.
+  In this case you will focus on a single user connected to the network, so you will choose the MAC address of the same and pass
+  it as a parameter when you are asked.
+  You are also allowed to the possibility of performing a global de-authentication, so you will de-authenticate all users from
+  network except yourself in case you are connected to it, you do this by passing the following MAC adress -> FF: FF: FF: FF: FF: FF
+
+  Once the 'attack' begins and the user is dropped from the network, you will have to stop the de-authentication process and wait
+  for him to reconnect. When reconnected, what is known as a 'handshake' is generated, and that is when we capture the password.
+
+
+
+  Therefore, once this process is done, by means of option 7 we specify 2 routes, on the one hand the Dictionary (which should be
+  placed on the Desktop) and on the other the one the file '.cap' that was generated in the option 4.
+  The program will start working until you find out the password, which will be displayed in a readable format.$endColour
+
+ $blueColour If you have doubts about any of the options, you can use '-h' accompanied by the option to see which main function has the same.
+
+  Ecample -> '-h1, -h3, -h5...'$endColour
+
+$greenColour**********************************************************************************************$endColour"
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
   fi
 }
