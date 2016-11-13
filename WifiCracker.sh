@@ -738,15 +738,32 @@ interfacesHelp(){
     echo -e "$blueColour Opción 2$endColour"
     echo " "
     echo -e "$yellowColour  Esta opción te muestra las interfaces que posees. Servirá para verificar en todo momento qué está
-    sucediendo con la interfaz que estamos trabajando, ya que en esta se realizarán algunos cambios. Generalmente en un principio
-    deberías tener 3 interfaces, a no ser que estés bajo una VPN... que tendrás una virtual de red más. La situada en la parte inferior
-    es la tarjeta de red, tarjeta de la cual nos aprovecharemos para una vez estando en modo monitor... poder capturar las redes
-    disponibles en nuestros alrededores.
+  sucediendo con la interfaz que estamos trabajando, ya que en esta se realizarán algunos cambios. Generalmente en un principio
+  deberías tener 3 interfaces, a no ser que estés bajo una VPN... que tendrás una virtual de red más. La situada en la parte inferior
+  es la tarjeta de red, tarjeta de la cual nos aprovecharemos para una vez estando en modo monitor... poder capturar las redes
+  disponibles en nuestros alrededores.
 
-    Podremos comprobar si estamos en modo monitor siempre que veamos una nueva interfaz llamada 'mon0'. En caso contrario, podrá
-    resultar que la tenemos dada de baja o bien no la hemos creado, por tanto tendremos que acudir a la opción 1 para crearla.$endColour"
+  Podremos comprobar si estamos en modo monitor siempre que veamos una nueva interfaz llamada 'mon0'. En caso contrario, podrá
+  resultar que la tenemos dada de baja o bien no la hemos creado, por tanto tendremos que acudir a la opción 1 para crearla.$endColour"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Option 2$endColour"
+    echo " "
+    echo -e "$yellowColour  This option shows you the interfaces you have. It will be used to verify at all times what is
+  happening with the interface that we are working on, as in this will be some changes. Generally at first you should have
+  3 interfaces, unless you are under a VPN ... you will have a virtual network more. The one located at the bottom is the
+  network card, card which we will take advantage of once being in monitor mode... able to capture the networks available
+  in our surroundings.
+
+  We can check if we are in monitor mode whenever we see a new interface called 'mon0'. Otherwise, it may be that it's
+  uncharged or we have not created it, so we will have to go to option 1 to create it.$endColour"
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
   fi
 
@@ -764,7 +781,7 @@ monitorDownHelp(){
   realizado estando en modo normal no nos será autorizado aún así siendo superusuario.
 
   En resúmen, con esta opción lo eliminamos completamente. Si queremos volver a darlo de alta, tendremos que usar la opción 1 nuevamente
-  para crear un nuevo modo monitor."
+  para crear un nuevo modo monitor.$endColour"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
@@ -774,7 +791,7 @@ monitorDownHelp(){
     clear
     echo -e "$blueColour Option 3$endColour"
     echo " "
-    echo -e "$yellowColour  Once we have achieved our goals, it's best to eliminate the monitor mode ... otherwise we will have uselessly
+    echo -e "$yellowColour  Once we have achieved our goals, it's best to eliminate the monitor mode... otherwise we will have uselessly
   activated without being used since we leave the program. Deleting it is different from discharging it, a monitor is discharged to
   make configurations on it and later release it, because otherwise any change made while in normal mode will not be authorized still being
   superuser.
@@ -782,7 +799,7 @@ monitorDownHelp(){
   In summary, with this option we eliminate it completely. If we want to re-register it, we will have to use option 1 again to create a new
   monitor mode."
     echo " "
-    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
   fi
 }
@@ -796,7 +813,7 @@ wifiScannerHelp(){
     echo -e "$yellowColour  Simple escaneo de redes Wifi disponibles en nuestro entorno. Importante tener en cuenta que si no estamos en modo
   monitor, no seremos capaces de capturar nada."
     echo " "
-    echo -e "$redColour Press <Enter> to return to main menu $endColour"
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
   fi
 
