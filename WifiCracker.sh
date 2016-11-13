@@ -145,12 +145,25 @@ interfacesMode(){
     echo " "
     echo -e "$greenColour Abriendo configuración de interfaz...$endColour"
     echo " "
-    echo -e "$greenColour'mon0' corresponderá a la nueva interfaz creada, encargada de escanear las redes WiFi disponibles...$endColour"
+    echo -e "$blueColour 'mon0' corresponderá a la nueva interfaz creada, encargada de escanear las redes WiFi disponibles...$endColour"
     echo " "
     sleep 4
     ifconfig
     echo " "
-    echo -e "$redColour Presiona <enter> para volver al menú principal"
+    echo -e "$redColour Presiona <enter> para volver al menú principal$endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$greenColour Opening Interface Settings...$endColour"
+    echo " "
+    echo -e "$blueColour 'mon0' will correspond to the new interface created, responsible for scanning the available WiFi networks...$endColour"
+    echo " "
+    sleep 4
+    ifconfig
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu$endColour"
     read
   fi
 
@@ -160,7 +173,7 @@ monitorDown(){
 
   if [ "$spanOptions" = "1" ]; then
     echo " "
-    echo -e "$greenColour Dando de baja el modo monitor...$endColour"
+    echo -e "$greenColour Eliminando modo monitor...$endColour"
     echo " "
     sleep 2
     if [ "$value" = "2" ]; then
@@ -174,7 +187,7 @@ monitorDown(){
 
       airmon-ng stop mon0
       echo " "
-      echo -e "$blueColour Interfaz mon0 dada de baja con éxito$endColour"
+      echo -e "$blueColour Interfaz mon0 eliminada con éxito$endColour"
       echo " "
       value=1
       echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
@@ -187,6 +200,34 @@ monitorDown(){
     fi
   fi
 
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -e "$greenColour Deleting monitor mode...$endColour"
+    echo " "
+    sleep 2
+    if [ "$value" = "2" ]; then
+
+      # Con este comando detienes por completo el modo monitor. Siempre que quieras
+      # volver a utilizarlo una vez parado, tendrás que volver a crearlo nuevamente
+      # a través de la opción 1.
+
+      # With this command, you stop the monitor mode. Whenever you want to use it
+      # again once stopped... you'll have to create it again through option 1
+
+      airmon-ng stop mon0
+      echo " "
+      echo -e "$blueColour 'mon0' interface successfully deleted$endColour"
+      echo " "
+      value=1
+      echo -e "$redColour Press <Enter> to return to main menu$endColour"
+      read
+    else
+      echo -e "$blueColour There is no mon0 interface, you have to start it with option 1$endColour"
+      echo " "
+      echo -e "$redColour Press <Enter> to return to main menu$endColour"
+      read
+    fi
+  fi
 }
 
 wifiScanner(){
@@ -255,6 +296,74 @@ wifiScanner(){
       echo -e "$redColour Inicia el modo monitor primero$endColour"
       echo " "
       echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
+      read
+    fi
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    if [ "$value" = "2" ]; then
+      echo " "
+      echo -e "$greenColour Nearby wifis networks are going to be scanned ...$endColour"
+      echo " "
+      echo -e "$greenColour Once more or less all networks are loaded, press Ctrl + C$endColour"
+      sleep 4
+
+      # 'airodump-ng' nos permite analizar las redes disponibles a través de una
+      # interfaz que le especifiquemos, en nuestro caso 'mon0'. Podría resultar
+      # más simple hacer 'airodump-ng wlp2s0' con la propia tarjeta de red
+      # directamente y acceder al escaneo de redes Wifi... pero el programa mismo
+      # te avisará de que es necesario inicializar el modo monitor, de lo contrario
+      # no te será permitido el escaneo de redes.
+
+      # 'airodump-ng' allows us to analyze the available networks via an specific interface,
+      # in our case... 'mon0'. It might be simpler to do 'airodump-ng wlp2s0' with our
+      # own network card and access the scanning wireless networks ... but the program itself
+      # will warn you it's necessary to initialize monitor mode, otherwise... you will not be
+      # allowed to network scanning
+
+      airodump-ng mon0
+      echo " "
+      echo -n -e "$yellowColour Red Wifi (ESSID) that wants to target: $endColour"
+      read wifiName
+      echo " "
+      echo -n -e "$yellowColour Dial the channel (CH) network is: $endColour"
+      read channelWifi
+      echo " "
+      echo -n -e "$yellowColour Folder name: $endColour"
+      read folderName
+      echo " "
+      echo -n -e "$yellowColour File name: $endColour"
+      read archiveName
+      echo " "
+      echo -n -e "$yellowColour Enter your system username: $endColour"
+      read userSystem
+      echo " "
+      echo -e "$greenColour A folder will be created on the desktop, it will contain all the information of the selected Wifi network$endColour"
+      echo " "
+      sleep 4
+      mkdir /home/$userSystem/Escritorio/$folderName
+      cd /home/$userSystem/Escritorio/$folderName
+      echo -e "$greenColour Now we will see the activity only in $wifiName $endColour "
+      echo " "
+      echo -e "$greenColour Open another terminal, and leaving in execution this process execute option 5$endColour"
+      echo " "
+      sleep 7
+
+      # El siguiente comando también podemos usarlo con la sintaxis: airodump-ng -c ' ' -w ' ' --bssid '$wifiMAC' mon0
+      # La 'essid' corresponde al nombre del Wifi, la 'bssid' a su dirección MAC. Con esto lo que hacemos es
+      # centrarnos en el escaneo de una única red especificada pasada por parámetros, aislando el resto de redes.
+
+      # The following command can also be use by the following syntax: airodump-ng -c '' -w '' --bssid '$ wifiMAC' mon0
+      # 'essid' corresponding to the Wifi's name and 'bssid' to his MAC adress. What we are doing with this is focussing
+      # on a unique network especified by parameters, isolating the other networks.
+
+      airodump-ng -c $channelWifi -w $archiveName --essid $wifiName mon0
+
+    else
+      echo " "
+      echo -e "$redColour Start monitor mode first$endColour"
+      echo " "
+      echo -e "$redColour Press <Enter> to return to main menu$endColour"
       read
     fi
   fi
@@ -353,7 +462,6 @@ resetProgram(){
     sleep 4
     echo " "
     echo -e "$greenColour Dando de baja el modo monitor...$endColour"
-    echo " "
     sleep 3
     airmon-ng stop mon0
     value=1
@@ -365,7 +473,6 @@ resetProgram(){
     sleep 4
     echo " "
     echo -e "$greenColour Disabling monitor mode...$endColour"
-    echo " "
     sleep 3
     airmon-ng stop mon0
     value=1
