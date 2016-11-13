@@ -1081,7 +1081,7 @@ versionSystem(){
 
   if [ "$spanOptions" = "1" ]; then
     echo " "
-    echo -e "$grayColour WifiCracker (v0.1.7) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
+    echo -e "$grayColour WifiCracker (v0.1.8) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
     echo " "
     echo -e "$redColour Presiona <Enter> para volver al menú principal$endColour"
     read
@@ -1089,7 +1089,7 @@ versionSystem(){
 
   if [ "$engOptions" = "1" ]; then
     echo " "
-    echo -e "$grayColour WifiCracker (v0.1.7) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
+    echo -e "$grayColour WifiCracker (v0.1.8) - Copyright 2016 © Marcelo Raúl Vázquez Pereyra$endColour"
     echo " "
     echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
@@ -1799,7 +1799,7 @@ if [ "$language" = "Español" ]; then
         sleep 0.1
         echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
         sleep 0.1
-        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.7)$endColour           $greenColour*$endColour"
+        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.8)$endColour           $greenColour*$endColour"
         sleep 0.1
         echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
         sleep 0.1
@@ -1885,7 +1885,7 @@ if [ "$language" = "Español" ]; then
         echo -e "$redColour                        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗$endColour                            $greenColour*$endColour"
         echo -e "$redColour                        ║║║║║║─║╔╝║╔═╗║───────║║$endColour                            $greenColour*$endColour"
         echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
-        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.7)$endColour           $greenColour*$endColour"
+        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.8)$endColour           $greenColour*$endColour"
         echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
         echo -e "$redColour                        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝ $endColour                     $greenColour*$endColour"
         echo -e "$greenColour*****************************************************************************$endColour"
@@ -1953,7 +1953,7 @@ if [ "$language" = "Español" ]; then
         echo -e "$redColour                        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗$endColour                            $greenColour*$endColour"
         echo -e "$redColour                        ║║║║║║─║╔╝║╔═╗║───────║║$endColour                            $greenColour*$endColour"
         echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
-        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.7)$endColour           $greenColour*$endColour"
+        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.8)$endColour           $greenColour*$endColour"
         echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
         echo -e "$redColour                        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝ $endColour                     $greenColour*$endColour"
         echo -e "$greenColour*****************************************************************************$endColour"
@@ -2091,7 +2091,7 @@ elif [ "$language" = "English" ]; then
         sleep 0.1
         echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
         sleep 0.1
-        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.7)$endColour           $greenColour*$endColour"
+        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.8)$endColour           $greenColour*$endColour"
         sleep 0.1
         echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
         sleep 0.1
@@ -2177,7 +2177,7 @@ elif [ "$language" = "English" ]; then
         echo -e "$redColour                        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗$endColour                            $greenColour*$endColour"
         echo -e "$redColour                        ║║║║║║─║╔╝║╔═╗║───────║║$endColour                            $greenColour*$endColour"
         echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
-        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.7)$endColour           $greenColour*$endColour"
+        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.8)$endColour           $greenColour*$endColour"
         echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
         echo -e "$redColour                        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝ $endColour                     $greenColour*$endColour"
         echo -e "$greenColour*****************************************************************************$endColour"
@@ -2245,7 +2245,7 @@ elif [ "$language" = "English" ]; then
         echo -e "$redColour                        ╔╗╔╗╔╗─╔═╗╔═══╗───────╔╗$endColour                            $greenColour*$endColour"
         echo -e "$redColour                        ║║║║║║─║╔╝║╔═╗║───────║║$endColour                            $greenColour*$endColour"
         echo -e "$redColour                        ║║║║║╠╦╝╚╦╣║─╚╬═╦══╦══╣║╔╦══╦═╗$endColour                     $greenColour*$endColour"
-        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.7)$endColour           $greenColour*$endColour"
+        echo -e "$redColour                        ║╚╝╚╝╠╬╗╔╬╣║─╔╣╔╣╔╗║╔═╣╚╝╣║═╣╔╝$endColour  $blueColour(v0.1.8)$endColour           $greenColour*$endColour"
         echo -e "$redColour                        ╚╗╔╗╔╣║║║║║╚═╝║║║╔╗║╚═╣╔╗╣║═╣║ $endColour                     $greenColour*$endColour"
         echo -e "$redColour                        ─╚╝╚╝╚╝╚╝╚╩═══╩╝╚╝╚╩══╩╝╚╩══╩╝ $endColour                     $greenColour*$endColour"
         echo -e "$greenColour*****************************************************************************$endColour"
