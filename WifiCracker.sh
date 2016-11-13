@@ -1149,7 +1149,7 @@ $greenColour********************************************************************
     clear
     echo " "
     echo -e "$greenColour*******************************************************************************************$endColour"
-    echo -e "$yellowColour The first step is to start the monitor mode through option 1. Once the monitor mode is started...
+    echo -e "$yellowColour  The first step is to start the monitor mode through option 1. Once the monitor mode is started...
   you are able to listen and capture any package that travels through the air.
 
   You can check via option 2 if you have successfully started the monitor interface.
@@ -1163,7 +1163,6 @@ $greenColour********************************************************************
   created in the Desktop with the name you want, it will contain several files ... among which will travel encrypted
   information, including the password of the routter. The one that interests us is the extension '.cap'.
 
-
   Once the folders and files are created, you proceed to de-authenticate the users of the network.
   In this case you will focus on a single user connected to the network, so you will choose the MAC address of the same and pass
   it as a parameter when you are asked.
@@ -1173,15 +1172,13 @@ $greenColour********************************************************************
   Once the 'attack' begins and the user is dropped from the network, you will have to stop the de-authentication process and wait
   for him to reconnect. When reconnected, what is known as a 'handshake' is generated, and that is when we capture the password.
 
-
-
   Therefore, once this process is done, by means of option 7 we specify 2 routes, on the one hand the Dictionary (which should be
   placed on the Desktop) and on the other the one the file '.cap' that was generated in the option 4.
   The program will start working until you find out the password, which will be displayed in a readable format.$endColour
 
  $blueColour If you have doubts about any of the options, you can use '-h' accompanied by the option to see which main function has the same.
 
-  Ecample -> '-h1, -h3, -h5...'$endColour
+  Example -> '-h1, -h3, -h5...'$endColour
 
 $greenColour**********************************************************************************************$endColour"
     echo " "
