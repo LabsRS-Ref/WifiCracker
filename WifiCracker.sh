@@ -759,12 +759,28 @@ monitorDownHelp(){
     echo -e "$blueColour Opción 3$endColour"
     echo " "
     echo -e "$yellowColour  Una vez hayamos conseguido nuestros objetivos, lo mejor es eliminar el modo monitor... pues de lo contrario
-    lo tendremos inútilmente activado sin ser utilizado desde que salgamos del programa. Eliminarlo es distinto a darlo de baja, un monitor
-    se da de baja para realizar configuraciones sobe él y posteriormente darlo de alta, porque de lo contrario cualquier tipo de cambio
-    realizado estando en modo normal no nos será autorizado aún así siendo superusuario.
+  lo tendremos inútilmente activado sin ser utilizado desde que salgamos del programa. Eliminarlo es distinto a darlo de baja, un monitor
+  se da de baja para realizar configuraciones sobe él y posteriormente darlo de alta, porque de lo contrario cualquier tipo de cambio
+  realizado estando en modo normal no nos será autorizado aún así siendo superusuario.
 
-    En resúmen, con esta opción lo eliminamos completamente. Si queremos volver a darlo de alta, tendremos que usar la opción 1 nuevamente
-    para crear un nuevo modo monitor."
+  En resúmen, con esta opción lo eliminamos completamente. Si queremos volver a darlo de alta, tendremos que usar la opción 1 nuevamente
+  para crear un nuevo modo monitor."
+    echo " "
+    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Option 3$endColour"
+    echo " "
+    echo -e "$yellowColour  Once we have achieved our goals, it's best to eliminate the monitor mode ... otherwise we will have uselessly
+  activated without being used since we leave the program. Deleting it is different from discharging it, a monitor is discharged to
+  make configurations on it and later release it, because otherwise any change made while in normal mode will not be authorized still being
+  superuser.
+
+  In summary, with this option we eliminate it completely. If we want to re-register it, we will have to use option 1 again to create a new
+  monitor mode."
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
     read
@@ -778,9 +794,20 @@ wifiScannerHelp(){
     echo -e "$blueColour Opción 4$endColour"
     echo " "
     echo -e "$yellowColour  Simple escaneo de redes Wifi disponibles en nuestro entorno. Importante tener en cuenta que si no estamos en modo
-    monitor, no seremos capaces de capturar nada."
+  monitor, no seremos capaces de capturar nada."
     echo " "
-    echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Option 4$endColour"
+    echo " "
+    echo -e "$yellowColour  Simple scanning of Wifi networks available in our environment. Important to note that if we are not in monitor
+  mode, we will not be able to capture anything."
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
   fi
 
