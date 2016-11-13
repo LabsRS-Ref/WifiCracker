@@ -793,16 +793,33 @@ macAttackHelp(){
     echo -e "$blueColour Opción 5$endColour"
     echo " "
     echo -e "$yellowColour  En esta opción enviarás paquetes de de-autenticación a un cliente determinado conectado a la red que tienes fijada
-    como objetivo. Mediante esta opción, eres capaz de echar a un usuario cualquiera de la red especificando su dirección MAC. También puedes
-    echarlos a todos usando como dirección MAC a atacar la siguiente -> FF:FF:FF:FF:FF:FF | que corresponde a un Broadcast (Todos los usuarios
-    conectados a la red).
+  como objetivo. Mediante esta opción, eres capaz de echar a un usuario cualquiera de la red especificando su dirección MAC. También puedes
+  echarlos a todos usando como dirección MAC a atacar la siguiente -> FF:FF:FF:FF:FF:FF | que corresponde a un Broadcast (Todos los usuarios
+  conectados a la red).
 
-    Esta opción es sumamente importante, pues después una vez se reconecte el usuario a la red, se generará el Handhsake... cosa de la que nos
-    aprovecharemos para capturar la contraseña del Wifi.
-    El 'ataque' de de-autenticación terminará hasta que nosotros queramos. Es decir, el usuario no podrá volverse a conectar a la red hasta que
-    nosotros paremos el envío de paquetes"
+  Esta opción es sumamente importante, pues después una vez se reconecte el usuario a la red, se generará el Handhsake... cosa de la que nos
+  aprovecharemos para capturar la contraseña del Wifi.
+  El 'ataque' de de-autenticación terminará hasta que nosotros queramos. Es decir, el usuario no podrá volverse a conectar a la red hasta que
+  nosotros paremos el envío de paquetes"
     echo " "
     echo -e "$redColour Pulse <Enter> para volver al menú principal $endColour"
+    read
+  fi
+
+  if [ "$engOptions" = "1" ]; then
+    clear
+    echo -e "$blueColour Option 5$endColour"
+    echo " "
+    echo -e "$yellowColour  In this option you will send de-authentication packages to a certain client connected to the target network.
+  With this option, you are able to drop any user on the network by specifying their MAC address. You can eject them all using the following
+  MAC address to attack -> FF: FF: FF: FF: FF: FF | Which corresponds to a Broadcast (All users connected to the network).
+
+  This option is extremely important, since once the user is reconnected to the network, the Handhsake will be generated ... something that
+  we will use to capture the Wifi password.
+  The de-authentication 'attack' will end until we want to. That is, the user will not be able to reconnect to the network until we stop shipping
+  packages "
+    echo " "
+    echo -e "$redColour Press <Enter> to return to main menu $endColour"
     read
   fi
 
