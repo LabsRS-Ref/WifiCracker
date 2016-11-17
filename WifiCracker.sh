@@ -27,9 +27,7 @@ engOptions=0
 spanOptions=0
 
 #Private IP Adress [hostname -I | Particular stored values]
-var1=$(hostname -I | cut -d "." -f 1)
-var2=$(hostname -I | cut -d "." -f 2)
-var3=$(hostname -I | cut -d "." -f 3)
+devName=$(hostname -I | cut -d '.' -f1-3)
 
 #Colours
 greenColour="\e[0;32m\033[1m"
@@ -1719,7 +1717,7 @@ connectedDevices(){
       echo -e "$greenColour Se van a listar los dispositivos conectados a la red$endColour"
       echo " "
       sleep 4
-      nmap -sP $var1.$var2.$var3.1-254
+      nmap -sP $devName.1-254
       echo " "
       echo -e "$redColour Presione <Enter> para volver al menú principal$endColour"
       read
@@ -1737,7 +1735,7 @@ connectedDevices(){
       echo -e "$greenColour Devices connected to the network will be listed$endColour"
       echo " "
       sleep 4
-      nmap -sP $var1.$var2.$var3.1-254
+      nmap -sP $devName.1-254
       echo " "
       echo -e "$redColour Press <Enter> to return to the main menu$endColour"
       read
