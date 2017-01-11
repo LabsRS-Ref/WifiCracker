@@ -1,5 +1,5 @@
 #<u>WifiCracker</u>
-[![WifiCracker logo](http://3.bp.blogspot.com/-xpkPrQ59VtI/TwBWadcLTNI/AAAAAAAAAK8/pJuxa9aK3ds/s1600/2008-11-06-wifi.jpg](#)<br><br>
+[![WifiCracker logo](https://s30.postimg.org/47hlfpgsh/2008_11_06_wifi.jpg)](#)<br><br>
 #<b>*********************************************************************</b>
 #<b>Disclaimer: I don't take any responsabilities over the use of this application, it's just for educational purposes</b>
 #<b>*********************************************************************</b>
