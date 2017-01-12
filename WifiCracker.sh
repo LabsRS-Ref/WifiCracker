@@ -877,7 +877,7 @@ necessaryPrograms(){
     if [ ! -x /usr/bin/aircrack-ng ];then
 
       echo " "
-    	echo -e "$blueColour Aircrack-ng:$endColour$redColour Noy installed$endColour"
+    	echo -e "$blueColour Aircrack-ng:$endColour$redColour Not installed$endColour"
       airng=1
     	sleep 0.4
 
